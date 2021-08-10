@@ -1,0 +1,14 @@
+{
+  "name": "fac-application",
+  "version": "1.0.0",
+  "description": "Paolo's application for the fac course",
+  "main": "app.js",
+  "scripts": {
+    "compile:sass": "sass --watch assets/sass/main.sass:assets/css/style.css"
+  },
+  "author": "Paolo Ghidoni",
+  "license": "ISC",
+  "devDependencies": {
+    "sass": "^1.35.2"
+  }
+}

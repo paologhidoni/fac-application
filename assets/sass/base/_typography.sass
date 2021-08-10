@@ -1,0 +1,75 @@
+
+/* TYPOGRAPHY ///////////////////////////////////////////////////////////////*/
+
+
+//Font Face
+@font-face 
+  font-family: '3dumb'
+  src: url('../../assets/fonts/3Dumb-webfont.woff') format('woff')
+  font-weight: normal
+  font-style: normal
+
+html
+  font-size: 62.5% // 1rem = 10px, 10/16 = 0.625 (62.5%) This defines what 1rem is at default viewport. 
+
+body
+  font-family: 'Raleway', sans-serif
+  font-weight: 400
+  line-height: 1.7
+  color: var(--color-grey-dark)
+  text-rendering: optimizeLegibility
+
+.nav
+  &__link
+    font-family: var(--font-family-heading)
+    text-decoration: none
+    color: #fff
+    font-weight: 600
+
+p
+  padding: 1rem 0
+  font-weight: 400
+  color: var(--bistre)
+  font-size: 1.8rem
+  text-align: justify
+  &.upper-border
+    padding-top: 3rem
+    // border-top: 1px solid var(--queen-blue)
+
+
+.heading-secondary
+  font-family: var(--font-family-heading)
+  font-weight: 600
+  color: #fff
+  font-size: 18rem
+  position: absolute
+  // align-self: flex-end
+  bottom: 10%
+  z-index: 1
+  letter-spacing: 3rem
+  // animation: hues 10s linear infinite
+  // text-shadow: -1px 1px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000
+  // text-shadow: 1px 1px #000, 1px 1px #000, 1px 1px #000, 1px 1px #000
+  @include respond(tab-land)
+    font-size: 15rem
+  @include respond(tab-port)
+    font-size: 10rem  
+    bottom: 5rem
+  @include respond(phone)
+    font-size: 4rem  
+    letter-spacing: 1.5rem
+
+.heading-tertiary
+  font-family: var(--font-family-heading)
+  font-weight: 500
+  font-size: 4rem
+  color: var(--queen-blue)
+  text-transform: uppercase
+  @include respond(tab-port)
+    font-size: 2.5rem  
+    
+
+footer p
+  font-size: 1rem
+  color: var(--color-white)
+  text-align: center

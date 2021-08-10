@@ -1,0 +1,32 @@
+// MEDIA QUERY MANAGER
+
+// $breakpoint argument choices
+
+// 1em = 16px
+
+// 0 - 600px: 				phone (Phone)
+// 600 - 900px:				tab-port (Tablet portrait)
+// 900 - 1200px:			tab-land (Tablet landscape)
+// 1200 - 1800:				(Desktop)
+// 1800px + : 				lg-desk (Large desktop)
+
+@mixin respond($breakpoint)
+	// width <= 600px
+	@if $breakpoint == phone
+		@media (max-width: 37.5em)		// 600px (600 / 16 = 37.5)
+			@content
+	// width <= 900px
+	@if $breakpoint == tab-port			
+		@media (max-width: 56.25em)		// 900px (900 / 16 = 56.25)
+			@content
+
+	@if $breakpoint == tab-land			// width <= 1200px
+		@media (max-width: 75em)			// 1200px (1200 / 16 = 75)
+			@content
+
+	@if $breakpoint == lg-desk			// width >= 1800px
+		@media (min-width: 112.5em)		// 1800px (1800 / 16 = 112.5)
+			@content
+
+
+

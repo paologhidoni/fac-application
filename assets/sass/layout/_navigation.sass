@@ -1,0 +1,108 @@
+/* Navigation */
+
+.navigation
+  &__button
+    position: fixed
+    z-index: 200
+    top: -5rem
+    left: 50%
+    transform: translateX(-50%)
+    // background-color: black
+    background-color: var(--queen-blue)  
+    height: 9rem
+    width: 12.5rem
+    border-radius: 50%
+    // box-shadow: 0rem 2rem 10rem 1rem var(--honey-yellow)
+    cursor: pointer
+    // clip-path: polygon(29% 0, 3% 41%, 8% 50%, 2% 68%, 16% 67%, 20% 81%, 27% 66%, 38% 81%, 47% 73%, 54% 80%, 60% 73%, 72% 82%, 77% 68%, 95% 73%, 93% 59%, 100% 50%, 88% 16%, 61% 0)
+    // animation: bulb 3s linear infinite
+  &__background
+    position: fixed
+    z-index: 50
+    top: -5rem
+    left: 50%
+    transform: translateX(-50%)
+    height: 9rem
+    width: 12.5rem
+    border-radius: 50%
+    // background-image: radial-gradient(var(--light-steel-blue), rgba(255,255,255,0.5))
+    // background-image: radial-gradient(var(--light-steel-blue), var(--queen-blue))
+    transition: transform 0.6s cubic-bezier(0, 0.55, 0.45, 1)
+    background-color: #476B9A
+    &-open
+      transform: scale(80)
+      // background-image: radial-gradient(var(--light-steel-blue), var(--queen-blue))
+  &__nav 
+    position: fixed
+    z-index: 150
+    display: flex
+    justify-content: center
+    align-items: center
+    opacity: 0
+    height: 100vh
+    width: 100%
+    top: -2000px
+    transition: opacity 2.5s
+    &-open
+      top: initial
+      opacity: 1
+  &__list
+    list-style: none
+    text-align: center
+  &__item
+    margin: 2rem 0
+  &__link
+    color: var(--font-menu-color)
+    &:link,
+    &:visited
+      display: inline-block
+      font-family: var(--font-family-heading)
+      text-decoration: none
+      font-size: 3rem
+      padding: 1rem 2rem
+      transition: all 0.2s
+    &:hover,
+    &:active
+      font-size: 3.5rem
+      color: var(--maximum-yellow-red)
+    &-current
+      color: var(--maximum-yellow-red)
+
+  &__icon
+    position: relative
+    top: 62%
+    z-index: 2500
+    left: 50%
+    transform: translateX(-50%)
+    &,
+    &::before,
+    &::after
+      display: inline-block
+      width: 3.5rem
+      height: 2px
+      background-color: white
+    &::before,
+    &::after	
+      content: ""
+      position: absolute
+      left: 0
+      transition: all 0.2s
+    &::before
+      width: 3.5rem
+      top: -0.8rem
+    &::after
+      width: 3.5rem
+      top: 0.8rem
+    &-clicked //.navigation__button-clicked
+      background-color: transparent
+      &::before
+        transform: rotate(45deg)
+        top: 0
+      &::after
+        top: 0
+        transform: rotate(-45deg)
+
+
+        
+
+
