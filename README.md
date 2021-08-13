@@ -1,3 +1,3 @@
 Paolo Ghidoni's Founders and Coders Application
 
-cohort 2021
+applicants cohort September 2021

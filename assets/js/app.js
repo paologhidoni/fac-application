@@ -9,6 +9,25 @@ const navigationNav= document.querySelector('.navigation__nav');
 const navigationlinks = document.querySelectorAll('.navigation__link');
 const navigationIcon = document.querySelector('.navigation__icon');
 
+
+////////////////////////////////////////////////////////////////////
+//Nav button appears after first section using Intersection Observer
+// const navHeight = getComputedStyle(navigationBtn).height; // Find height of navigation button to use as rootMargin in the IntersectionObserver.
+
+// const fixedNav = function(entries) { // Function to add/ remove the 'fixed' class to the navigation when going past the 'origins' section.
+//   if(!entries[0].isIntersecting) {
+//     navigationBtn.classList.add('fixed');
+//     navigationBack.classList.add('fixed');
+//   } else {
+//     navigationBtn.classList.remove('fixed');
+//     navigationBack.classList.remove('fixed');  
+//   }
+// }
+
+// const sectionOriginsObserver = new IntersectionObserver(fixedNav, {root: null, threshold: 0, rootMargin: `-${navHeight}`});
+// sectionOriginsObserver.observe(document.querySelector('#origins'));
+
+
 ///////////////////////////////////////
 //Nav button clicked & Navigation open
 navigationBtn.addEventListener('click', function(e) {
@@ -19,6 +38,8 @@ navigationBtn.addEventListener('click', function(e) {
   navigationIcon.classList.toggle('navigation__icon-clicked');
 });
 
+
+
 ////////////////////////////////////////
 //Smooth scrolling with event delegation 
 
@@ -27,7 +48,7 @@ navigationNav.addEventListener('click', (e) => {
   e.preventDefault(); //prevent anything from happening when clicked
 
   if(e.target.classList.contains('navigation__link')) {  //Matching strategy, selecting only clicks on links, not on ul
-    console.log(e.target)
+    // console.log(e.target)
     navigationBack.classList.toggle('navigation__background-open'); // open/close navigation background
     navigationNav.classList.toggle('navigation__nav-open'); // open/close navigation list
 
@@ -43,7 +64,7 @@ navigationNav.addEventListener('click', (e) => {
     let targetCoordinates = targetSection.getBoundingClientRect();
     window.scrollTo({
       top: targetCoordinates.top + window.pageYOffset, // distance from target and top ow the window + distance from top of the window to top of the page
-      behavior: 'smooth',
+      behavior: 'smooth'
     });
   }
 })
@@ -55,8 +76,28 @@ navigationNav.addEventListener('click', (e) => {
 
 
 //////////////////////////////////////////
-//Animation on links in footer
+// Accordion functionality
+const accordionLabels = document.querySelectorAll('.accordion-label');
 
+accordionLabels.forEach(label => {
+
+  label.addEventListener('click', function(e) {
+    const contentHeight = label.nextElementSibling.scrollHeight;
+    label.classList.toggle('accordion-label--open');
+
+    (label.classList.contains('accordion-label--open')) ?
+      label.nextElementSibling.style.maxHeight = `${contentHeight}px` :
+      label.nextElementSibling.style.maxHeight = '0px';
+  })
+
+})
+
+
+
+
+
+//////////////////////////////////////////
+// Animation on links in footer
 const footerLinksContainer = document.querySelector('.section__footer-links-container');
 
 function linksHover(e, url, transform, opacity) {
@@ -104,26 +145,84 @@ document.querySelector('.date').textContent = (new Date().getFullYear());
 
 
 
-
 //////////////////////////////////////////
-//Parallax Effect in Hero Sections
+//Paragraphs appear when scrolling down using Intersection Observer
+const paragraphs = document.querySelectorAll('.grid-item');
 
-// parallax effect
-let heroes = document.querySelectorAll(".section__hero");
-let heroBackgrounds = document.querySelectorAll(".section__hero-background");
+const showParagraphs = function(entries, observer) {
+  const [entry] = entries;
+  if(!entry.isIntersecting) return;
+    entry.target.classList.remove('grid-item--hidden');
+  observer.unobserve(entry.target);
+}
 
-
-// parallax effect on heroes - works only on one
-
-
-window.addEventListener("scroll", function(){
-  let valueY = window.scrollY;
-
-  for (let i = 0; i < heroBackgrounds.length; i++) {
-    heroBackground[i].style.top = valueY * 0.5 + "px";
-  }
+const paragraphObserver = new IntersectionObserver(showParagraphs, {
+  root: null,
+  threshold: 0.2,
+  rootMargin: '-50px'
 });
 
+paragraphs.forEach(function(paragraph) {
+
+  paragraphObserver.observe(paragraph);
+  paragraph.classList.add('grid-item--hidden');
+
+});
+
+
+
+
+
+
+
+
+
+//////////////////////////////////////////
+// Parallax Effect in Hero Sections using Intersection Observer
+
+// const heroBackgrounds = document.querySelectorAll('.section__hero-background');
+
+// const moveBackground = function(entries) {
+  
+//       const[entry] = entries;
+
+//       if(entry.isIntersecting) {
+//         // console.log(entry.target);
+//         // let valueY = entry.target.getBoundingClientRect().top;
+//       let valueY = entry.intersectionRatio;
+//       console.log(valueY);
+        
+//         entry.target.style.top = valueY * 0.6 + "px";
+//         // entry.target.style.top = "300px";
+//       }
+
+// }
+
+// const heroesBackgroundObserver = new IntersectionObserver(moveBackground, {
+//   root: null,
+//   threshold: 0
+// });
+
+// heroBackgrounds.forEach(function(heroBackground) {
+
+//   heroesBackgroundObserver.observe(heroBackground);
+
+// });
+
+
+
+
+
+//   heroBackgrounds.forEach(background => {
+// window.addEventListener("scroll", function(){
+//     // let valueY = window.pageYOffset;
+
+//     let fromTop = background.getBoundingClientRect().bottom;
+//     console.log(fromTop);
+//     background.style.top = fromTop * 0.1 + "px";
+// });
+//   })
+    
 
 
 

@@ -13,15 +13,14 @@ html
   font-size: 62.5% // 1rem = 10px, 10/16 = 0.625 (62.5%) This defines what 1rem is at default viewport. 
 
 body
-  font-family: 'Raleway', sans-serif
+  font-family: var(--font-family-main), sans-serif
   font-weight: 400
   line-height: 1.7
-  color: var(--color-grey-dark)
   text-rendering: optimizeLegibility
 
 .nav
   &__link
-    font-family: var(--font-family-heading)
+    font-family: var(--font-family-alternative)
     text-decoration: none
     color: #fff
     font-weight: 600
@@ -32,16 +31,14 @@ p
   color: var(--bistre)
   font-size: 1.8rem
   text-align: justify
-  &.upper-border
+  &.padding-upper
     padding-top: 3rem
-    // border-top: 1px solid var(--queen-blue)
-
 
 .heading-secondary
-  font-family: var(--font-family-heading)
+  font-family: var(--font-family-alternative)
   font-weight: 600
   color: #fff
-  font-size: 18rem
+  font-size: 12rem
   position: absolute
   // align-self: flex-end
   bottom: 10%
@@ -60,15 +57,15 @@ p
     letter-spacing: 1.5rem
 
 .heading-tertiary
-  font-family: var(--font-family-heading)
+  font-family: var(--font-family-alternative)
   font-weight: 500
-  font-size: 4rem
-  color: var(--queen-blue)
-  text-transform: uppercase
+  font-size: 3.5rem
+  padding-bottom: 3rem
+  color: var(--color-white)
+  // text-transform: uppercase
   @include respond(tab-port)
     font-size: 2.5rem  
     
-
 footer p
   font-size: 1rem
   color: var(--color-white)
