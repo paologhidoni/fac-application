@@ -77,17 +77,22 @@ navigationNav.addEventListener('click', (e) => {
 
 //////////////////////////////////////////
 // Accordion functionality
-const accordionLabels = document.querySelectorAll('.accordion-label');
+const accordionLabels = document.querySelectorAll('.accordion__label');
 
 accordionLabels.forEach(label => {
 
   label.addEventListener('click', function(e) {
-    const contentHeight = label.nextElementSibling.scrollHeight;
-    label.classList.toggle('accordion-label--open');
 
-    (label.classList.contains('accordion-label--open')) ?
+    if(label === e.target) {
+      const contentHeight = label.nextElementSibling.scrollHeight;
+      label.classList.toggle('accordion__label--open');
+
+      (label.classList.contains('accordion__label--open')) ?
       label.nextElementSibling.style.maxHeight = `${contentHeight}px` :
       label.nextElementSibling.style.maxHeight = '0px';
+
+    }
+
   })
 
 })
@@ -146,26 +151,26 @@ document.querySelector('.date').textContent = (new Date().getFullYear());
 
 
 //////////////////////////////////////////
-//Paragraphs appear when scrolling down using Intersection Observer
-const paragraphs = document.querySelectorAll('.grid-item');
+//sectionWrappers appear when scrolling down using Intersection Observer
+const sectionWrappers = document.querySelectorAll('.section__wrapper');
 
-const showParagraphs = function(entries, observer) {
+const showsectionWrappers = function(entries, observer) {
   const [entry] = entries;
   if(!entry.isIntersecting) return;
-    entry.target.classList.remove('grid-item--hidden');
+    entry.target.classList.remove('section__wrapper--hidden');
   observer.unobserve(entry.target);
 }
 
-const paragraphObserver = new IntersectionObserver(showParagraphs, {
+const wrapperObserver = new IntersectionObserver(showsectionWrappers, {
   root: null,
-  threshold: 0.2,
+  threshold: 0.4,
   rootMargin: '-50px'
 });
 
-paragraphs.forEach(function(paragraph) {
+sectionWrappers.forEach(function(wrapper) {
 
-  paragraphObserver.observe(paragraph);
-  paragraph.classList.add('grid-item--hidden');
+  wrapperObserver.observe(wrapper);
+  wrapper.classList.add('section__wrapper--hidden');
 
 });
 

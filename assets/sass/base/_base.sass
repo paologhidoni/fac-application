@@ -11,58 +11,75 @@ body
   position: relative
 
 
-/* Grid */
-.grid-container
-  padding: 4rem 0 0 0
-  display: grid
-  grid-template-areas: "paragraph-1" "paragraph-2"
-  @include respond(phone) //600px phone
-   display: block
+// /* Grid */
+// .grid-container
+//   padding: 4rem 0 0 0
+//   // display: grid
+//   // grid-template-areas: "paragraph-1" "paragraph-2"
+//   // @include respond(phone) //600px phone
+//   //  display: block
 
-.grid-item
-  padding: 2rem 4rem
-  transition: all 0.6s
-  &--hidden
-    opacity: 0
-    transform: translateY(-6rem)
+// .grid-item
+//   padding: 2rem 4rem
+//   transition: all 0.6s
+//   &--hidden
+//     opacity: 0
+//     transform: translateY(-6rem)
 
 
 /* sections */
-.section__hero
-  position: relative
+.section
+  &__hero
+    position: relative
+    width: 100%
+    min-height: 55vh
+    overflow: hidden
+    display: flex
+    justify-content: center
+    align-items: flex-end
+    // clip-path: polygon(0 95%, 45% 95%, 20% 100%, 15% 95%, 100% 95%, 100% 30px, 0 0) // skewed on top and bottom
+    // clip-path: polygon(0 95%, 45% 95%, 50% 100%, 55% 95%, 100% 95%, 100% 0, 0 0) // just arrow down
+    // clip-path: polygon(3% 0, 3% 95%, 45% 95%, 50% 100%, 55% 95%, 97% 95%, 97% 0) // arrow down, cut on sides
+    clip-path: polygon(0 0, 5% 95%, 45% 95%, 50% 100%, 55% 95%, 95% 95%, 100% 0) // arrow down, cut on sides going wider upwards - wider
+    // clip-path: polygon(0 0, 0 20%, 2% 95%, 45% 95%, 50% 100%, 55% 95%, 98% 95%, 100% 0) // arrow down, cut on sides going wider upwards - narrower
+
+    // @include respond(tab-port)
+    //   height: 50vh //60
+
+    @include respond(phone)
+      min-height: 40vh
+
+    &-background
+      position: absolute
+      top: 0
+      left: 0
+      width: 100%
+      height: 100%
+      object-fit: cover
+      pointer-events: none
+
+  &__wrapper
+    padding: 10rem 20rem 10rem 20rem
+    height: auto
+    @include respond(tab-land)
+      padding: 6rem 15rem
+    @include respond(tab-port)
+      padding: 6rem 6rem
+    @include respond(phone)
+      padding: 4rem 4rem
+    transition: all 0.6s
+
+    // &--hidden
+    //   opacity: 0
+    //   transform: translateY(-6rem)
+
+.heading-background
   width: 100%
-  height: 70vh
-  overflow: hidden
+  min-height: 10rem
+  padding-bottom: 10rem
   display: flex
   justify-content: center
-  align-items: center
-  // clip-path: polygon(0 95%, 45% 95%, 20% 100%, 15% 95%, 100% 95%, 100% 30px, 0 0) // skewed on top and bottom
-  // clip-path: polygon(0 95%, 45% 95%, 50% 100%, 55% 95%, 100% 95%, 100% 0, 0 0) // just arrow down
-  // clip-path: polygon(3% 0, 3% 95%, 45% 95%, 50% 100%, 55% 95%, 97% 95%, 97% 0) // arrow down, cut on sides
-  clip-path: polygon(0 0, 5% 95%, 45% 95%, 50% 100%, 55% 95%, 95% 95%, 100% 0) // arrow down, cut on sides going wider upwards - wider
-  // clip-path: polygon(0 0, 0 20%, 2% 95%, 45% 95%, 50% 100%, 55% 95%, 98% 95%, 100% 0) // arrow down, cut on sides going wider upwards - narrower
-
-  @include respond(tab-port)
-    height: 60vh //60
-
-  @include respond(phone)
-    height: 40vh //60
-
-  &-background
-    position: absolute
-    top: 0
-    left: 0
-    width: 100%
-    height: 100%
-    object-fit: cover
-    pointer-events: none
-
-.chapter
-  padding: 5% 15rem 10% 15rem
-  height: auto
-  @include respond(tab-land)
-    padding: 2rem 1rem
-  
-
-
+  align-items: flex-start
+  background-color: rgb(0, 0, 0, 0.3)
+  z-index: 1
 

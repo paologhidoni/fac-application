@@ -33,28 +33,29 @@ p
   text-align: justify
   &.padding-upper
     padding-top: 3rem
-
+    
 .heading-secondary
   font-family: var(--font-family-alternative)
   font-weight: 600
-  color: #fff
-  font-size: 12rem
+  color: var(--color-white)
+  font-size: 8rem
   position: absolute
-  // align-self: flex-end
-  bottom: 10%
+  bottom: 15%
   z-index: 1
   letter-spacing: 3rem
   // animation: hues 10s linear infinite
   // text-shadow: -1px 1px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000
   // text-shadow: 1px 1px #000, 1px 1px #000, 1px 1px #000, 1px 1px #000
+
+.heading-secondary
   @include respond(tab-land)
-    font-size: 15rem
+    font-size: 7rem
   @include respond(tab-port)
-    font-size: 10rem  
+    font-size: 6rem  
     bottom: 5rem
   @include respond(phone)
     font-size: 4rem  
-    letter-spacing: 1.5rem
+    letter-spacing: 1.2rem
 
 .heading-tertiary
   font-family: var(--font-family-alternative)
@@ -64,9 +65,68 @@ p
   color: var(--color-white)
   // text-transform: uppercase
   @include respond(tab-port)
+    text-align: center
+    font-size: 3.5rem  
+  @include respond(phone)
     font-size: 2.5rem  
     
 footer p
   font-size: 1rem
   color: var(--color-white)
   text-align: center
+
+/* Sections */
+
+/* Intro */
+.section__intro
+
+  .heading-primary
+    font-family: var(--font-family-alternative)
+    font-weight: 600
+    color: var(--color-white)
+    font-size: 8rem
+    z-index: 99
+    letter-spacing: 2.5rem 
+    @include respond(tab-land)
+      font-size: 7rem
+    @include respond(tab-port)
+      font-size: 6rem  
+      bottom: 5rem
+    @include respond(phone)
+      font-size: 3.5rem  
+      letter-spacing: 1.5rem 
+
+  .introduction-copy
+    z-index: 99
+    color: var(--color-white)
+    // line-height: 1
+    // letter-spacing: initial
+    font-size: 2rem
+    padding: 1rem 0
+
+  .heading-tertiary
+    color: var(--queen-blue)
+
+  h1
+    display: flex
+    flex-direction: column
+    justify-content: flex-start
+    align-items: center
+
+
+/* Origins */
+.section__origins
+
+  .heading-tertiary
+    color: var(--queen-blue)
+
+
+
+/* Accordion */
+.accordion
+  &__label
+    text-transform: uppercase
+    font-family: var(--font-family-alternative)
+    font-size: 1.8rem
+    letter-spacing: 0.2rem
+    color: var(--queen-blue)

@@ -14,3 +14,20 @@
 
   // background-color: var(--sea-shell)
   background-color: var(--peach-puff)
+
+.people
+  display: flex
+  justify-content: space-evenly
+  padding-bottom: 12rem
+
+.avatar
+  &-michelle, &-aaron
+    width: 18rem
+    height: 18rem
+    border-radius: 50%
+    border: 4px solid var(--queen-blue)
+    background-color: var(--queen-blue)
+
+    @include respond(phone)
+      width: 10rem
+      height: 10rem
