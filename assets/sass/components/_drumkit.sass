@@ -1,0 +1,57 @@
+/* Drumkit */
+
+.drumKit 
+	// background-image: url('../img/carpet.png')
+	// background-size: 100%
+	// background-repeat: no-repeat
+	// background-position: 0 7rem
+	width: 60vw 
+	height: 60vh
+	margin: 0 auto 
+	position: relative 
+	@include respond(phone)
+		width: 80vw 
+		height: 20vh
+
+.carpet
+	width: 100%
+	position: absolute
+	bottom: 0
+
+
+.kit-piece 
+	max-width: 10% 
+	position: absolute 
+	bottom: 0 
+
+.kick 
+	max-width: 20% 
+	left: 46% 
+	z-index: 1 
+
+.snare 
+	z-index: 10 
+	max-width: 15% 
+	left: 33% 
+
+.hi-hat 
+	max-width: 15% 
+	z-index: 9 
+	bottom: 2.5% 
+	left: 36% 
+
+.cymbal-left 
+	max-width: 30% 
+	z-index: 8 
+	bottom: 3% 
+	left: 12%
+
+.cymbal-right 
+	max-width: 30% 
+	z-index: 8 
+	bottom: 3% 
+	left: 56% 
+
+.smallerDeviceControls
+	display: none
+	padding-top: 3rem

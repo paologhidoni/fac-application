@@ -270,3 +270,7 @@ sectionWrappers.forEach(function(wrapper) {
 
 //////////////////////////////////////////
 //Images fading in
+
+// const containerOfAbsolute = document.querySelector('.containerOfAbsolute');
+// const drumkit = document.querySelector('.drumKit');
+// drumkit.style.height = containerOfAbsolute.height;

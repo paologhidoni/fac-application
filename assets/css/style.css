@@ -331,79 +331,68 @@ footer p {
   margin: 0.5rem 0;
 }
 
-/* Gallery */
-.gallery {
-  grid-area: gallery;
-}
-.gallery__grid-cont {
-  display: grid;
-  grid-gap: var(--grid-gap);
-  margin: var(--grid-gap) var(--grid-gap);
-}
-.gallery__grid-cont--1 {
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: minmax(300px, 1fr);
-}
-@media (max-width: 900px) {
-  .gallery__grid-cont--1 {
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: minmax(200px, auto);
-  }
-}
-@media (max-width: 900px) and (max-width: 37.5em) {
-  .gallery__grid-cont--1 {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: minmax(150px, auto) minmax(150px, auto);
-  }
-}
-.gallery__grid-cont--2 {
-  grid-template-columns: 2fr 2fr;
-  grid-template-rows: minmax(300px, 1fr);
-}
-@media (max-width: 900px) {
-  .gallery__grid-cont--2 {
-    grid-template-columns: 1fr;
-    grid-template-rows: minmax(200px, auto) minmax(402px, auto);
-  }
-}
-@media (max-width: 900px) and (max-width: 37.5em) {
-  .gallery__grid-cont--2 {
-    grid-template-rows: minmax(150px, auto) minmax(302px, auto);
-  }
-}
-.gallery__grid-cont--3 {
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: minmax(300px, 1fr);
-}
-@media (max-width: 900px) {
-  .gallery__grid-cont--3 {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: minmax(200px, auto);
-  }
-}
-@media (max-width: 900px) and (max-width: 37.5em) {
-  .gallery__grid-cont--3 {
-    grid-template-rows: minmax(150px, auto) minmax(150px, auto);
-  }
-}
-.gallery__grid-cont-sub {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  grid-gap: var(--grid-gap);
-}
-.gallery__grid-cont-sub--1 {
-  grid-template-rows: 1fr;
-}
-.gallery__grid-item {
-  background-size: cover;
-  background-position: center top;
-  animation: animatedBackground 1.5s ease-in;
+/* Drumkit */
+.drumKit {
+  width: 60vw;
+  height: 60vh;
+  margin: 0 auto;
+  position: relative;
 }
 @media (max-width: 37.5em) {
-  .gallery__grid-item--3 {
-    grid-column: 1/3;
+  .drumKit {
+    width: 80vw;
+    height: 20vh;
   }
+}
+
+.carpet {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
+.kit-piece {
+  max-width: 10%;
+  position: absolute;
+  bottom: 0;
+}
+
+.kick {
+  max-width: 20%;
+  left: 46%;
+  z-index: 1;
+}
+
+.snare {
+  z-index: 10;
+  max-width: 15%;
+  left: 33%;
+}
+
+.hi-hat {
+  max-width: 15%;
+  z-index: 9;
+  bottom: 2.5%;
+  left: 36%;
+}
+
+.cymbal-left {
+  max-width: 30%;
+  z-index: 8;
+  bottom: 3%;
+  left: 12%;
+}
+
+.cymbal-right {
+  max-width: 30%;
+  z-index: 8;
+  bottom: 3%;
+  left: 56%;
+}
+
+.smallerDeviceControls {
+  display: none;
+  padding-top: 3rem;
 }
 
 /* LAYOUT ///////////////////////////////////////////////////////////////*/
@@ -543,7 +532,7 @@ footer p {
 
 /* Footer */
 .section__footer {
-  background-color: var(--peach-puff);
+  background-color: var(--color-white);
 }
 .section__footer-front-layer {
   padding: 4rem 0;
@@ -689,7 +678,7 @@ footer p {
   width: 100%;
   height: 100%;
   clip-path: polygon(5% 0, 0 10%, 3% 95%, 0% 100%, 100% 100%, 97% 95%, 100% 10%, 95% 0);
-  background-color: var(--peach-puff);
+  background-color: var(--color-white);
 }
 
 .people {
