@@ -340,6 +340,7 @@ footer p {
 .drumkit__btn {
   background-color: rgba(242, 38, 19, 0.8);
   border: 2px dotted var(--color-black);
+  color: var(--color-black);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -363,6 +364,13 @@ footer p {
   .drumkit__control-panel {
     display: none;
   }
+}
+.drumkit__instructions {
+  list-style-type: none;
+  text-align: center;
+  line-height: 1.8;
+  margin-top: 5rem;
+  font-size: 1.5rem;
 }
 
 .carpet {
@@ -419,6 +427,7 @@ footer p {
 }
 
 .drumkit-mobile-btn {
+  margin: 0 auto;
   font-weight: 600;
   font-size: 1rem;
   border-radius: 50%;
@@ -461,7 +470,7 @@ footer p {
 }
 
 #snare-btn {
-  grid-column: 3/4;
+  grid-column: 2/3;
   grid-row: 3/4;
 }
 

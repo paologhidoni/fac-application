@@ -33,6 +33,7 @@ const audioContext = new AudioContext();
 
 
 ///// createBuffer() parameters: /////
+
 //numberOfChannels: 
 //number of samples in the entire buffer, multiply our sample rate by the number of seconds in our sample
 //sample rate of our buffer
@@ -53,7 +54,7 @@ for (let i = 0; i < buffer.length; i++) { // assigning a random value between -1
 
 //the destination node represents whatever speakers are connected to play the audio on the computer.
 const primaryGainControl = audioContext.createGain(); // we create a gain node to control the main output volume.
-primaryGainControl.gain.setValueAtTime(0.05, 0); // we connect all of our audio nodes to our gain node. 0.5 is the 'gain volume', using a value less than 0 decreases the volume, more than 0 increases the volume.
+primaryGainControl.gain.setValueAtTime(0.50, 0); // we connect all of our audio nodes to our gain node. 0.40 is the 'gain volume', using a value less than 0 decreases the volume, more than 0 increases the volume.
 primaryGainControl.connect(audioContext.destination); //Connect the gain control to the output.
 
 

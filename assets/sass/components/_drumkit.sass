@@ -12,6 +12,7 @@
 	&__btn
 		background-color: rgba(242, 38, 19, 0.8)
 		border: 2px dotted var(--color-black)
+		color: var(--color-black)
 		display: flex
 		align-items: center
 		justify-content: center
@@ -33,6 +34,13 @@
 			padding: 0 1rem
 		@include respond(tab-port)
 			display: none
+
+	&__instructions
+		list-style-type: none
+		text-align: center
+		line-height: 1.8
+		margin-top: 5rem
+		font-size: 1.5rem
 
 .carpet
 	width: 100%
@@ -81,6 +89,7 @@
 	margin-top: 6rem
 
 .drumkit-mobile-btn
+	margin: 0 auto
 	font-weight: 600
 	font-size: 1rem
 	border-radius: 50%
@@ -114,5 +123,5 @@
 	grid-row: 5/6
 
 #snare-btn
-	grid-column: 3/4
+	grid-column: 2/3
 	grid-row: 3/4
