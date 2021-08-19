@@ -11,22 +11,6 @@ body
   position: relative
 
 
-// /* Grid */
-// .grid-container
-//   padding: 4rem 0 0 0
-//   // display: grid
-//   // grid-template-areas: "paragraph-1" "paragraph-2"
-//   // @include respond(phone) //600px phone
-//   //  display: block
-
-// .grid-item
-//   padding: 2rem 4rem
-//   transition: all 0.6s
-//   &--hidden
-//     opacity: 0
-//     transform: translateY(-6rem)
-
-
 /* sections */
 .section
   &__hero
@@ -37,14 +21,7 @@ body
     display: flex
     justify-content: center
     align-items: flex-end
-    // clip-path: polygon(0 95%, 45% 95%, 20% 100%, 15% 95%, 100% 95%, 100% 30px, 0 0) // skewed on top and bottom
-    // clip-path: polygon(0 95%, 45% 95%, 50% 100%, 55% 95%, 100% 95%, 100% 0, 0 0) // just arrow down
-    // clip-path: polygon(3% 0, 3% 95%, 45% 95%, 50% 100%, 55% 95%, 97% 95%, 97% 0) // arrow down, cut on sides
     clip-path: polygon(0 0, 5% 95%, 45% 95%, 50% 100%, 55% 95%, 95% 95%, 100% 0) // arrow down, cut on sides going wider upwards - wider
-    // clip-path: polygon(0 0, 0 20%, 2% 95%, 45% 95%, 50% 100%, 55% 95%, 98% 95%, 100% 0) // arrow down, cut on sides going wider upwards - narrower
-
-    // @include respond(tab-port)
-    //   height: 50vh //60
 
     @include respond(phone)
       min-height: 40vh

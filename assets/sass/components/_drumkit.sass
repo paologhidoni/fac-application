@@ -1,10 +1,6 @@
 /* Drumkit */
 
-.drumKit 
-	// background-image: url('../img/carpet.png')
-	// background-size: 100%
-	// background-repeat: no-repeat
-	// background-position: 0 7rem
+.drumkit 
 	width: 60vw 
 	height: 60vh
 	margin: 0 auto 
@@ -13,11 +9,35 @@
 		width: 80vw 
 		height: 20vh
 
+	&__btn
+		background-color: rgba(242, 38, 19, 0.8)
+		border: 2px dotted var(--color-black)
+		display: flex
+		align-items: center
+		justify-content: center
+		width: 10rem
+		margin: 4rem auto 4rem auto
+		font-family: var(--font-family-alternative)
+		// @include respond(tab-port)
+		// 	margin-bottom: 4rem
+
+	&__control-panel
+		display: flex
+		flex-direction: column
+		justify-content: space-between
+		align-items: center
+		margin: 3rem 0 0 1rem
+		font-family: var(--font-family-alternative)
+		p
+			font-size: 2rem
+			padding: 0 1rem
+		@include respond(tab-port)
+			display: none
+
 .carpet
 	width: 100%
 	position: absolute
 	bottom: 0
-
 
 .kit-piece 
 	max-width: 10% 
@@ -53,5 +73,46 @@
 	left: 56% 
 
 .smallerDeviceControls
+	width: 100%
+	// display: none
+	display: grid
+	grid-template-columns: repeat(4, 1fr)
+	grid-template-rows: repeat(4, 1fr)
+	margin-top: 6rem
+
+.drumkit-mobile-btn
+	font-weight: 600
+	font-size: 1rem
+	border-radius: 50%
+	background-color: var(--honey-yellow)
 	display: none
-	padding-top: 3rem
+	justify-content: center
+	align-items: center
+	border: 2px solid black
+	width: 5rem
+	height: 5rem
+	transition: tranform 0.2s
+	&:hover, &:active
+		transform: scale(1.2)
+	@include respond(tab-port)
+		display: flex
+
+#crash-l-btn
+	grid-column: 1/2
+	grid-row: 1/2
+
+#crash-r-btn
+	grid-column: 4/5
+	grid-row: 1/2
+
+#hi-hat-btn
+	grid-column: 1/2
+	grid-row: 3/4
+
+#kick-btn
+	grid-column: 3/4
+	grid-row: 5/6
+
+#snare-btn
+	grid-column: 3/4
+	grid-row: 3/4

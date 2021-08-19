@@ -8,6 +8,21 @@
 // Turn your machine's volume down before start playing, then slowly turn it up to gradually check how loud the drum kit is!
 // You shouldn' be pressing any alt keys while playing and your cap locks should be off.
 
+const drumkit = document.querySelector('.drumkit');
+const drumkitBtn = document.querySelector('.drumkit__btn');
+
+// ON/OFF button functionality
+drumkitBtn.addEventListener('click', function() {
+  drumkit.classList.toggle('on');
+  if(drumkit.classList.contains('on')) {
+    drumkitBtn.textContent = 'ON';
+    drumkitBtn.style.backgroundColor = 'rgba(0, 230, 64, 0.8)';
+  } else {
+    drumkitBtn.textContent = 'OFF';
+    drumkitBtn.style.backgroundColor = 'rgba(242, 38, 19, 0.8)';
+  }
+});
+
 
 // Drum kit audio setup
 const audioContext = new AudioContext();
@@ -43,8 +58,6 @@ primaryGainControl.connect(audioContext.destination); //Connect the gain control
 
 
 // MP3 AUDIO FILES ////////////////////////////////////////////////////////////////////
-
-
 const drumkitSoundsURLs = {
 
   kick: 'assets/sounds/kick.mp3',
@@ -55,63 +68,105 @@ const drumkitSoundsURLs = {
 
 };
 
+
+
 // Function to generate sounds
 const generateSound = async (id) => {
 
-    const response = await fetch(drumkitSoundsURLs[id]);
+  const response = await fetch(drumkitSoundsURLs[id]);
 
-    const soundBuffer = await response.arrayBuffer();
+  const soundBuffer = await response.arrayBuffer();
 
-    const pieceBuffer = await audioContext.decodeAudioData(soundBuffer);
-    
-    const pieceSource = audioContext.createBufferSource();
+  const pieceBuffer = await audioContext.decodeAudioData(soundBuffer);
+  
+  const pieceSource = audioContext.createBufferSource();
 
-    pieceSource.buffer = pieceBuffer;
+  pieceSource.buffer = pieceBuffer;
 
-    pieceSource.connect(primaryGainControl);
+  pieceSource.connect(primaryGainControl);
 
-    pieceSource.start();
+  pieceSource.start();
 
 };
 
 
 
 // Drum Kit Functionality
-const kit_pieces = document.querySelectorAll('.kit-piece');
 
-// const kick = document.querySelector('.kick');
-const snare = document.querySelector('.snare');
-const hi_hat = document.querySelector('.hi-hat');
-// const cymbalLeft = document.querySelector('.cymbal-left');
-// const cymbalRight = document.querySelector('.cymbal-right');
-
+// DESKTOP VERSION
 window.addEventListener('keydown', function(event) {
 
-  event.preventDefault();
+  if(drumkit.classList.contains('on')) { // If button is ON
 
-  let piece = '';
+    event.preventDefault();
 
-  event.key === 's' ? 
-    piece = document.querySelector('.snare') :
-  event.key === ' ' ? 
-    piece = document.querySelector('.kick') :
-  event.key === 'k' ? 
-    piece = document.querySelector('.cymbal-right') :
-  event.key === 'a' ? 
-    piece = document.querySelector('.cymbal-left') :
-  event.key === 'h' ? 
-    piece = document.querySelector('.hi-hat') :    
-    piece = undefined; 
+    let piece = '';
 
-  // console.log(piece);
-  if(piece !== undefined) {
-    piece.src = `assets/img/${piece.id}-active.png`; // Change image when kit-piece is played to give a visual hint of which one is played, adding a yellow stroke.
-    setTimeout(() => { 
-      piece.src = `assets/img/${piece.id}.png`; // Give the kit-piece its original image after 100milliseconds.
-    }, 100);
-    
-    generateSound(piece.id);
- 
+    event.key === 's' ? 
+      piece = document.querySelector('.snare') :
+    event.key === ' ' ? 
+      piece = document.querySelector('.kick') :
+    event.key === 'k' ? 
+      piece = document.querySelector('.cymbal-right') :
+    event.key === 'a' ? 
+      piece = document.querySelector('.cymbal-left') :
+    event.key === 'h' ? 
+      piece = document.querySelector('.hi-hat') :    
+      piece = undefined; 
+
+    // console.log(piece);
+    if(piece !== undefined) { 
+      piece.src = `assets/img/${piece.id}-active.png`; // Change image when kit-piece is played to give a visual hint of which one is played, adding a yellow stroke.
+      setTimeout(() => { 
+        piece.src = `assets/img/${piece.id}.png`; // Give the kit-piece its original image after 100milliseconds.
+      }, 100);
+      
+      generateSound(piece.id);
+    }
   }
-
 });
+
+
+// TABLET - MOBILE VERSION
+
+// // const kick = document.querySelector('.kick-btn');
+// const snare = document.querySelector('.snare-btn');
+// const hi_hat = document.querySelector('.hi-hat-btn');
+// // const cymbalLeft = document.querySelector('.crash-l-btn');
+// // const cymbalRight = document.querySelector('.crash-R-btn');
+
+const kitMobileButtons = document.querySelectorAll('.drumkit-mobile-btn');
+      console.log(kitMobileButtons);
+
+kitMobileButtons.forEach(button => {
+
+  button.addEventListener('click', function(event) {
+
+    if(drumkit.classList.contains('on')) { // If button is ON
+
+      let piece = '';
+
+      event.target.id === 'snare-btn' ? 
+        piece = document.querySelector('.snare') :
+      event.target.id === 'kick-btn' ? 
+        piece = document.querySelector('.kick') :
+      event.target.id === 'crash-r-btn' ? 
+        piece = document.querySelector('.cymbal-right') :
+      event.target.id === 'crash-l-btn' ? 
+        piece = document.querySelector('.cymbal-left') :
+      event.target.id === 'hi-hat-btn' ? 
+        piece = document.querySelector('.hi-hat') :    
+        piece = undefined; 
+
+      // console.log(piece);
+      if(piece !== undefined) {
+        piece.src = `assets/img/${piece.id}-active.png`; // Change image when kit-piece is played to give a visual hint of which one is played, adding a yellow stroke.
+        setTimeout(() => { 
+          piece.src = `assets/img/${piece.id}.png`; // Give the kit-piece its original image after 100milliseconds.
+        }, 100);
+        
+        generateSound(piece.id);
+      }
+    }
+  })
+})
