@@ -25,8 +25,8 @@ drumkitBtn.addEventListener('click', function() {
 
 
 // Drum kit audio setup
-const audioContext = new AudioContext();
-
+// const audioContext = new AudioContext();
+const audioContext = new (window.AudioContext || window.webkitAudioContext)(); // Adds support for Safari
 // Audio buffer represents a certain duration of sound and stores the amplitude value of the signal
 
 // console.log(audioContext.sampleRate);
@@ -137,7 +137,7 @@ window.addEventListener('keydown', function(event) {
 // // const cymbalRight = document.querySelector('.crash-R-btn');
 
 const kitMobileButtons = document.querySelectorAll('.drumkit-mobile-btn');
-      console.log(kitMobileButtons);
+      // console.log(kitMobileButtons);
 
 kitMobileButtons.forEach(button => {
 

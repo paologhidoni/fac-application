@@ -145,26 +145,53 @@ document.querySelector('.date').textContent = (new Date().getFullYear());
 
 
 ////////////////////////////////////////////////////////////////////////
-//sectionWrappers appear when scrolling down using Intersection Observer
-const sectionWrappers = document.querySelectorAll('.section__wrapper');
+// Paragraphs fade in as user scrolls down, using Intersection Observer
 
-const showsectionWrappers = function(entries, observer) {
+
+//on section wrappers
+// const sectionWrappers = document.querySelectorAll('.section__wrapper');
+
+// const showsectionWrappers = function(entries, observer) {
+//   const [entry] = entries;
+//   if(!entry.isIntersecting) return;
+//     entry.target.classList.remove('section__wrapper--hidden');
+//   observer.unobserve(entry.target);
+// }
+
+// const wrapperObserver = new IntersectionObserver(showsectionWrappers, {
+//   root: null,
+//   threshold: 0.4,
+//   rootMargin: '-50px'
+// });
+
+// sectionWrappers.forEach(function(wrapper) {
+
+//   wrapperObserver.observe(wrapper);
+//   wrapper.classList.add('section__wrapper--hidden');
+
+// });
+
+
+// on grid items
+const gridItems = document.querySelectorAll('.grid__item');
+
+const showgridItems = function(entries, observer) {
   const [entry] = entries;
   if(!entry.isIntersecting) return;
-    entry.target.classList.remove('section__wrapper--hidden');
+    entry.target.classList.remove('grid__item--hidden');
   observer.unobserve(entry.target);
 }
 
-const wrapperObserver = new IntersectionObserver(showsectionWrappers, {
+const gridItemObserver = new IntersectionObserver(showgridItems, {
   root: null,
   threshold: 0.4,
   rootMargin: '-50px'
 });
 
-sectionWrappers.forEach(function(wrapper) {
+gridItems.forEach(function(gridItem) {
 
-  wrapperObserver.observe(wrapper);
-  wrapper.classList.add('section__wrapper--hidden');
+  gridItemObserver.observe(gridItem);
+  gridItem.classList.add('grid__item--hidden');
 
 });
 
