@@ -59,17 +59,14 @@ primaryGainControl.connect(audioContext.destination); //Connect the gain control
 
 
 // MP3 AUDIO FILES ////////////////////////////////////////////////////////////////////
-const drumkitSoundsURLs = {
 
+const drumkitSoundsURLs = {
   kick: 'assets/sounds/kick.mp3',
   snare:  'assets/sounds/snare.mp3',
   hi_hat: 'assets/sounds/hi-hat.mp3',
   cymbal_left: 'assets/sounds/cymbal-left.mp3',
   cymbal_right: 'assets/sounds/cymbal-right.mp3'
-
 };
-
-
 
 // Function to generate sounds
 const generateSound = async (id) => {
@@ -89,7 +86,6 @@ const generateSound = async (id) => {
   pieceSource.start();
 
 };
-
 
 
 // Drum Kit Functionality
@@ -129,12 +125,6 @@ window.addEventListener('keydown', function(event) {
 
 
 // TABLET - MOBILE VERSION
-
-// // const kick = document.querySelector('.kick-btn');
-// const snare = document.querySelector('.snare-btn');
-// const hi_hat = document.querySelector('.hi-hat-btn');
-// // const cymbalLeft = document.querySelector('.crash-l-btn');
-// // const cymbalRight = document.querySelector('.crash-R-btn');
 
 const kitMobileButtons = document.querySelectorAll('.drumkit-mobile-btn');
       // console.log(kitMobileButtons);

@@ -2,22 +2,17 @@
   
 .section
   &__hopes // rear layer
-    // background-color: var(--beau-blue)
-    background-color: var(--pale-cerulean)
+    background-color: var(--color-front-now)
     .heading-tertiary
       color: var(--color-white)
     &-front-layer //front layer
       width: 100%
       height: 100%
-      // clip-path: polygon(0 100%, 45% 100%, 20% 100%, 15% 100%, 100% 100%, 100% 30px, 0 0)
-      clip-path: polygon(0 50%, 0 100%, 100% 100%, 100% 50%, 94% 0, 6% 0) // upper corners cut
+      background-color: var(--color-front-hopes)
       clip-path: polygon(0 50%, 0 100%, 100% 100%, 100% 50%, 97% 0, 3% 0) // upper corners cut narrower
 
-      background-color: var(--opal)
+    & .section__wrapper:nth-of-type(2)
+      padding-bottom: 0
 
-
-.section__hopes .section__wrapper:nth-of-type(2)
-  padding-bottom: 0
-
-.section__hopes .section__wrapper:nth-of-type(3)
-  padding-top: 0
+    & .section__wrapper:nth-of-type(3)
+      padding-top: 0

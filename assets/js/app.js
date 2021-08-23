@@ -10,25 +10,6 @@ const navigationlinks = document.querySelectorAll('.navigation__link');
 const navigationIcon = document.querySelector('.navigation__icon');
 
 
-////////////////////////////////////////////////////////////////////
-//Nav button appears after first section using Intersection Observer
-// const navHeight = getComputedStyle(navigationBtn).height; // Find height of navigation button to use as rootMargin in the IntersectionObserver.
-
-// const fixedNav = function(entries) { // Function to add/ remove the 'fixed' class to the navigation when going past the 'origins' section.
-//   if(!entries[0].isIntersecting) {
-//     navigationBtn.classList.add('fixed');
-//     navigationBack.classList.add('fixed');
-//   } else {
-//     navigationBtn.classList.remove('fixed');
-//     navigationBack.classList.remove('fixed');  
-//   }
-// }
-
-// const sectionOriginsObserver = new IntersectionObserver(fixedNav, {root: null, threshold: 0, rootMargin: `-${navHeight}`});
-// sectionOriginsObserver.observe(document.querySelector('#origins'));
-
-
-///////////////////////////////////////
 //Nav button clicked & Navigation open
 navigationBtn.addEventListener('click', function(e) {
   e.preventDefault();
@@ -40,7 +21,6 @@ navigationBtn.addEventListener('click', function(e) {
 
 
 
-////////////////////////////////////////
 //Smooth scrolling with event delegation 
 
 //add event listener to common parent element
@@ -110,7 +90,7 @@ function linksHover(e, url, transform, opacity) {
   if(e.target.classList.contains('section__footer-link')) {
     const targetLink = e.target;
     const targetId = `${e.target.id}`;
-    console.log(targetId);
+    // console.log(targetId);
 
     const siblings = targetLink.closest('.section__footer').querySelectorAll('.section__footer-link');
 
@@ -147,32 +127,6 @@ document.querySelector('.date').textContent = (new Date().getFullYear());
 ////////////////////////////////////////////////////////////////////////
 // Paragraphs fade in as user scrolls down, using Intersection Observer
 
-
-//on section wrappers
-// const sectionWrappers = document.querySelectorAll('.section__wrapper');
-
-// const showsectionWrappers = function(entries, observer) {
-//   const [entry] = entries;
-//   if(!entry.isIntersecting) return;
-//     entry.target.classList.remove('section__wrapper--hidden');
-//   observer.unobserve(entry.target);
-// }
-
-// const wrapperObserver = new IntersectionObserver(showsectionWrappers, {
-//   root: null,
-//   threshold: 0.4,
-//   rootMargin: '-50px'
-// });
-
-// sectionWrappers.forEach(function(wrapper) {
-
-//   wrapperObserver.observe(wrapper);
-//   wrapper.classList.add('section__wrapper--hidden');
-
-// });
-
-
-// on grid items
 const gridItems = document.querySelectorAll('.grid__item');
 
 const showgridItems = function(entries, observer) {
@@ -195,6 +149,26 @@ gridItems.forEach(function(gridItem) {
 
 });
 
+
+
+// NOT IMPLEMENTED //
+
+////////////////////////////////////////////////////////////////////
+//Nav button appears after first section using Intersection Observer
+// const navHeight = getComputedStyle(navigationBtn).height; // Find height of navigation button to use as rootMargin in the IntersectionObserver.
+
+// const fixedNav = function(entries) { // Function to add/ remove the 'fixed' class to the navigation when going past the 'origins' section.
+//   if(!entries[0].isIntersecting) {
+//     navigationBtn.classList.add('fixed');
+//     navigationBack.classList.add('fixed');
+//   } else {
+//     navigationBtn.classList.remove('fixed');
+//     navigationBack.classList.remove('fixed');  
+//   }
+// }
+
+// const sectionOriginsObserver = new IntersectionObserver(fixedNav, {root: null, threshold: 0, rootMargin: `-${navHeight}`});
+// sectionOriginsObserver.observe(document.querySelector('#origins'));
 
 
 

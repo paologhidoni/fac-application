@@ -1,4 +1,21 @@
-/* VARIABLES */
+/* TABLE OF CONTENTS //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/* Line 3 - VARIABLES 
+ * Line 11 - UTILITIES 
+ * Line 11 - BASE
+ * * - sections
+ * * - grid
+ * * - heading 
+ * Line 11 - TYPOGRAPHY 
+ * * - base
+ * * - sections
+ * * - components    
+ * Line 11 - COMPONENTS
+ * * - accordion
+ * * - drumkit
+ * Line 11 - LAYOUT 
+ * Line 11 - SECTIONS */
+/*////////////////////////////////////////////////////////////////////////////////// */
+/* VARIABLES //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 :root {
   /* colors */
   --color-white: #fff;
@@ -7,26 +24,22 @@
   --honey-yellow: #FBAF00;
   --queen-blue: #476C9B;
   /* section backgrounds */
+  /* intro */
+  --color-front-intro: #FFF3D6;
   /* origins */
-  --cultured: #F5F5F5;
-  --platinum: #EBEAE8;
+  --color-front-origins: #F5F5F5;
   /* now */
-  --pale-cerulean: #A3C7E1;
+  --color-front-now: #A3C7E1;
   /* hopes */
-  --opal: #B7CCCC;
-  /* fun */
-  --peach-puff: #FFDEC2;
-  --sea-shell: #FFF4EB;
-  --beau-blue: #D1E3F0;
+  --color-front-hopes: #B7CCCC;
   /* Typography */
-  --default-font-size: 1.6rem;
-  --color-grey-dark: #777;
+  --default-font-size: 1.8rem;
   --font-family-main: "Raleway";
   --font-family-alternative: "3dumb";
   --font-menu-color: #fff;
 }
 
-/* UTILITIES ///////////////////////////////////////////////////////////////*/
+/* UTILITIES //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 .u-margin-top {
   margin-top: 6rem;
 }
@@ -35,7 +48,7 @@
   margin-top: 10rem;
 }
 
-/* BASE ///////////////////////////////////////////////////////////////*/
+/* BASE //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/  
 *,
 *::after,
 *::before {
@@ -46,7 +59,6 @@
 body {
   box-sizing: border-box;
   min-height: 100vh;
-  position: relative;
 }
 
 /* sections */
@@ -95,6 +107,7 @@ body {
   }
 }
 
+/* grid */
 .grid__container {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -117,12 +130,6 @@ body {
   grid-column: 1/2;
   grid-row: 1/2;
 }
-@media (max-width: 56.25em) {
-  .grid__item-1 {
-    grid-column: 1/2;
-    grid-row: 1/2;
-  }
-}
 .grid__item-2 {
   grid-column: 2/3;
   grid-row: 2/3;
@@ -134,6 +141,7 @@ body {
   }
 }
 
+/* heading */
 .heading-background {
   width: 100%;
   min-height: 10rem;
@@ -144,14 +152,20 @@ body {
   background-color: rgba(0, 0, 0, 0.3);
   z-index: 1;
 }
+@media (max-width: 37.5em) {
+  .heading-background {
+    min-height: 4rem;
+  }
+}
 
-/* TYPOGRAPHY ///////////////////////////////////////////////////////////////*/
+/* TYPOGRAPHY //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 @font-face {
   font-family: "3dumb";
   src: url("../../assets/fonts/3Dumb-webfont.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }
+/* base */
 html {
   font-size: 62.5%;
 }
@@ -166,19 +180,13 @@ body {
 .nav__link {
   font-family: var(--font-family-alternative);
   text-decoration: none;
-  color: #fff;
-  font-weight: 600;
+  color: var(--color-white);
 }
 
 p {
   padding: 1rem 0;
-  font-weight: 400;
-  color: var(--bistre);
-  font-size: 1.8rem;
+  font-size: var(--default-font-size);
   text-align: justify;
-}
-p.padding-upper {
-  padding-top: 3rem;
 }
 
 .heading-secondary {
@@ -191,7 +199,6 @@ p.padding-upper {
   z-index: 1;
   letter-spacing: 3rem;
 }
-
 @media (max-width: 75em) {
   .heading-secondary {
     font-size: 7rem;
@@ -235,7 +242,7 @@ footer p {
   text-align: center;
 }
 
-/* Sections */
+/* sections */
 /* Intro */
 .section__intro .heading-primary {
   font-family: var(--font-family-alternative);
@@ -294,30 +301,50 @@ footer p {
   color: var(--queen-blue);
 }
 
+/* components */
 /* Accordion */
 .accordion__label {
-  text-transform: uppercase;
-  font-family: var(--font-family-alternative);
-  font-size: 1.8rem;
+  font-size: 2.1rem;
   letter-spacing: 0.2rem;
   color: var(--queen-blue);
 }
+@media (max-width: 37.5em) {
+  .accordion__label {
+    font-size: var(--default-font-size);
+  }
+}
+.accordion__label::before {
+  font-size: 3rem;
+}
 
-/* COMPONENTS ///////////////////////////////////////////////////////////////*/
+/* Drumkit */
+.drumkit__control-panel {
+  font-family: var(--font-family-alternative);
+}
+.drumkit__control-panel p {
+  font-size: 2rem;
+  padding: 0 1rem;
+}
+.drumkit-mobile-btn {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* COMPONENTS //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 /* Accordion */
 .accordion {
   display: flex;
   flex-direction: column;
   max-width: 100%;
-  margin: 0 auto;
+  margin: 2rem auto 0 auto;
 }
 .accordion__panel {
   padding: 0.5rem 2rem;
   margin-bottom: 2rem;
-  transition: all 0.6s;
   background-color: rgba(255, 255, 255, 0.8);
   border-left: 6px solid var(--queen-blue);
   border-radius: 5px;
+  transition: all 0.6s;
 }
 .accordion__panel:hover {
   transform: scale(1.01);
@@ -330,20 +357,13 @@ footer p {
   cursor: pointer;
   padding: 0.5rem 0 0 0;
 }
-@media (max-width: 37.5em) {
-  .accordion__label {
-    font-size: 1.8rem;
-  }
-}
 .accordion__label::before {
   content: "+";
-  font-family: var(--font-family-main);
-  background: url("../img/light-bulb.png") no-repeat;
-  background-size: contain;
-  font-size: 3rem;
   padding-right: 1rem;
   width: 48px;
   height: 48px;
+  background: url("../img/light-bulb.png") no-repeat;
+  background-size: contain;
   background-position: 0.4rem 0;
   transition: all 1.2s;
 }
@@ -378,14 +398,15 @@ footer p {
 }
 .drumkit__btn {
   background-color: rgba(242, 38, 19, 0.8);
-  border: 1px solid var(--color-black);
-  color: var(--color-black);
+  border: 2px solid var(--color-black);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 10rem;
+  width: 6rem;
+  height: 4rem;
   margin: 4rem auto 4rem auto;
-  font-family: var(--font-family-alternative);
+  border-radius: 50%;
+  cursor: pointer;
 }
 .drumkit__control-panel {
   display: flex;
@@ -393,11 +414,6 @@ footer p {
   justify-content: space-between;
   align-items: center;
   margin: 3rem 0 0 1rem;
-  font-family: var(--font-family-alternative);
-}
-.drumkit__control-panel p {
-  font-size: 2rem;
-  padding: 0 1rem;
 }
 @media (max-width: 56.25em) {
   .drumkit__control-panel {
@@ -408,7 +424,7 @@ footer p {
   list-style-type: none;
   text-align: center;
   line-height: 1.8;
-  margin-top: 5rem;
+  margin-top: 1rem;
   font-size: 1.5rem;
 }
 
@@ -467,8 +483,6 @@ footer p {
 
 .drumkit-mobile-btn {
   margin: 0 auto;
-  font-weight: 600;
-  font-size: 1rem;
   border-radius: 50%;
   background-color: var(--honey-yellow);
   display: none;
@@ -513,7 +527,7 @@ footer p {
   grid-row: 3/4;
 }
 
-/* LAYOUT ///////////////////////////////////////////////////////////////*/
+/* LAYOUT //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/	
 /* Header */
 .header {
   height: 10rem;
@@ -654,13 +668,13 @@ footer p {
 }
 .section__footer-front-layer {
   padding: 4rem 0;
-  clip-path: polygon(3% 0%, 97% 0%, 100% 100%, 0% 100%);
-  background-color: var(--queen-blue);
   height: 16vh;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background-color: var(--queen-blue);
+  clip-path: polygon(3% 0%, 97% 0%, 100% 100%, 0% 100%);
 }
 .section__footer-links-container {
   position: relative;
@@ -686,13 +700,13 @@ footer p {
   background-image: url("../img/codewars.png");
 }
 
-/* SECTIONS ///////////////////////////////////////////////////////////////*/
+/* SECTIONS //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 /* Intro - section */
 .section__intro-front-layer {
   width: 100%;
   height: 100%;
   clip-path: polygon(0 100%, 45% 100%, 20% 100%, 15% 100%, 100% 100%, 100% 0, 0 0);
-  background-color: #FFF3D6;
+  background-color: var(--color-front-intro);
 }
 .section__hero--intro {
   clip-path: polygon(0 95%, 45% 95%, 20% 100%, 15% 95%, 100% 95%, 100% 0, 0 0);
@@ -705,7 +719,7 @@ footer p {
   min-height: 20rem;
   padding: 3rem 20rem 5rem 20rem;
   background-color: rgba(0, 0, 0, 0.3);
-  z-index: 1;
+  z-index: 99;
 }
 @media (max-width: 75em) {
   .introduction {
@@ -719,58 +733,57 @@ footer p {
 }
 @media (max-width: 37.5em) {
   .introduction {
-    padding: 3rem 4rem 12rem 4rem;
+    padding: 9rem 4rem 9rem 4rem;
   }
 }
 
-.avatar {
+.avatar-paolo {
   position: absolute;
   bottom: -20px;
   left: 15%;
-  z-index: 1;
   width: 18rem;
 }
 @media (max-width: 75em) {
-  .avatar {
+  .avatar-paolo {
     width: 15rem;
   }
 }
 @media (max-width: 56.25em) {
-  .avatar {
+  .avatar-paolo {
     width: 12rem;
   }
 }
 @media (max-width: 37.5em) {
-  .avatar {
+  .avatar-paolo {
     width: 11rem;
   }
 }
 
 /* Origins - section */
 .section__origins {
-  background-color: #FFF3D6;
+  background-color: var(--color-front-intro);
 }
 .section__origins-front-layer {
   width: 100%;
   height: 100%;
-  background-color: var(--cultured);
+  background-color: var(--color-front-origins);
   clip-path: polygon(0 50%, 0 100%, 100% 100%, 100% 50%, 97% 0, 3% 0);
 }
 
 /* Now - section */
 .section__now {
-  background-color: var(--cultured);
+  background-color: var(--color-front-origins);
 }
 .section__now-front-layer {
   width: 100%;
   height: 100%;
-  background-color: var(--pale-cerulean);
+  background-color: var(--color-front-now);
   clip-path: polygon(5% 0, 0 10%, 3% 95%, 0% 100%, 100% 100%, 97% 95%, 100% 10%, 95% 0);
 }
 
 /* Hopes - section */
 .section__hopes {
-  background-color: var(--pale-cerulean);
+  background-color: var(--color-front-now);
 }
 .section__hopes .heading-tertiary {
   color: var(--color-white);
@@ -778,32 +791,34 @@ footer p {
 .section__hopes-front-layer {
   width: 100%;
   height: 100%;
-  clip-path: polygon(0 50%, 0 100%, 100% 100%, 100% 50%, 94% 0, 6% 0);
+  background-color: var(--color-front-hopes);
   clip-path: polygon(0 50%, 0 100%, 100% 100%, 100% 50%, 97% 0, 3% 0);
-  background-color: var(--opal);
 }
-
 .section__hopes .section__wrapper:nth-of-type(2) {
   padding-bottom: 0;
 }
-
 .section__hopes .section__wrapper:nth-of-type(3) {
   padding-top: 0;
 }
 
 /* Fun - section */
 .section__fun {
-  background-color: var(--opal);
+  background-color: var(--color-front-hopes);
 }
 .section__fun .heading-tertiary {
   color: var(--queen-blue);
 }
-
 .section__fun-front-layer {
   width: 100%;
   height: 100%;
   clip-path: polygon(5% 0, 0 10%, 3% 95%, 0% 100%, 100% 100%, 97% 95%, 100% 10%, 95% 0);
   background-color: var(--color-white);
+}
+.section__fun-front-layer div:nth-child(3) {
+  padding-top: 0;
+}
+.section__fun-front-layer div:nth-child(3) .heading-tertiary {
+  text-align: center;
 }
 
 .people {

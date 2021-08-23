@@ -1,21 +1,19 @@
-/* COMPONENTS ///////////////////////////////////////////////////////////////*/
+/* COMPONENTS //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 /* Accordion */
   
-
 .accordion
   display: flex
   flex-direction: column
   max-width: 100%
-  margin: 0 auto
+  margin: 2rem auto 0 auto
 
   &__panel
     padding: 0.5rem 2rem
     margin-bottom: 2rem
-    transition: all 0.6s
     background-color: rgba(255, 255, 255, 0.8)
     border-left: 6px solid var(--queen-blue)
-    // border-bottom: 1px solid var(--queen-blue)
     border-radius: 5px
+    transition: all 0.6s
     &:hover
       transform: scale(1.01)
       border-bottom: 1px solid var(--queen-blue)
@@ -26,18 +24,14 @@
     flex-wrap: wrap
     cursor: pointer
     padding: 0.5rem 0 0 0
-    @include respond(phone)
-      font-size: 1.8rem
 
     &::before
       content: '+'
-      font-family: var(--font-family-main)
-      background: url("../img/light-bulb.png") no-repeat
-      background-size: contain
-      font-size: 3rem
       padding-right: 1rem
       width: 48px
       height: 48px
+      background: url("../img/light-bulb.png") no-repeat
+      background-size: contain
       background-position: 0.4rem 0
       transition: all 1.2s
 

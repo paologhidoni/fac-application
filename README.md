@@ -60,7 +60,7 @@ Thanks FaC for this huge opportunity.
 
 // Drumkit app
 
-- [ ]Understand more deeply the [Web Audio Api](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API) and add volume controls (like knobs or faders) to the drum kit.
+- [ ]Understand more deeply the [Web Audio Api](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API) to add volume or equalizer controls (like knobs or faders) to the drum kit and fix latency issues (if possible), mostly on tablet/mobile.
 
 - [ ]Add a dropdown menu for the user to be able to change sound library,choosing between a set of sounds for each piece of the drumkit.
 
@@ -69,6 +69,8 @@ Thanks FaC for this huge opportunity.
 - [ ]Allow the user to personalise the controls to play the drumkit, both in the desktop and tablet/mobile version.
 
 - [ ]Add different samples at different 'velocities' (perceived loudness and tone of the 'hit') to each kit piece, to make them sound more real and interesting.
+
+- [ ]Improve audio compatibility with tablet/mobile browsers. (audio seems not to be working in Safari on Iphone, works on laptop and android).
 
 -  A thousand more features, I could have probably gone on for a year or two :D
 

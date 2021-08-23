@@ -1,6 +1,5 @@
 
-/* TYPOGRAPHY ///////////////////////////////////////////////////////////////*/
-
+/* TYPOGRAPHY //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
 //Font Face
 @font-face 
@@ -8,6 +7,9 @@
   src: url('../../assets/fonts/3Dumb-webfont.woff') format('woff')
   font-weight: normal
   font-style: normal
+
+
+/* base */
 
 html
   font-size: 62.5% // 1rem = 10px, 10/16 = 0.625 (62.5%) This defines what 1rem is at default viewport. 
@@ -22,17 +24,13 @@ body
   &__link
     font-family: var(--font-family-alternative)
     text-decoration: none
-    color: #fff
-    font-weight: 600
+    color: var(--color-white)
 
 p
   padding: 1rem 0
-  font-weight: 400
-  color: var(--bistre)
-  font-size: 1.8rem
+  // color: var(--font-color-primary)
+  font-size: var(--default-font-size)
   text-align: justify
-  &.padding-upper
-    padding-top: 3rem
     
 .heading-secondary
   font-family: var(--font-family-alternative)
@@ -43,11 +41,6 @@ p
   bottom: 15%
   z-index: 1
   letter-spacing: 3rem
-  // animation: hues 10s linear infinite
-  // text-shadow: -1px 1px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000
-  // text-shadow: 1px 1px #000, 1px 1px #000, 1px 1px #000, 1px 1px #000
-
-.heading-secondary
   @include respond(tab-land)
     font-size: 7rem
   @include respond(tab-port)
@@ -63,7 +56,6 @@ p
   font-size: 3.5rem
   padding-bottom: 3rem
   color: var(--color-white)
-  // text-transform: uppercase
   @include respond(tab-port)
     text-align: center
     font-size: 3.5rem  
@@ -75,7 +67,7 @@ footer p
   color: var(--color-white)
   text-align: center
 
-/* Sections */
+/* sections */
 
 /* Intro */
 .section__intro
@@ -121,20 +113,36 @@ footer p
       text-align: justify
       list-style-position: inside
 
-
 /* Origins */
 .section__origins
 
   .heading-tertiary
     color: var(--queen-blue)
 
-
+/* components */
 
 /* Accordion */
 .accordion
   &__label
-    text-transform: uppercase
-    font-family: var(--font-family-alternative)
-    font-size: 1.8rem
+    font-size: 2.1rem
     letter-spacing: 0.2rem
     color: var(--queen-blue)
+    @include respond(phone)
+      font-size: var(--default-font-size)
+
+    &::before
+      font-size: 3rem
+
+/* Drumkit */
+
+.drumkit
+
+  &__control-panel
+    font-family: var(--font-family-alternative)
+    p
+      font-size: 2rem
+      padding: 0 1rem
+
+  &-mobile-btn
+    font-weight: 600
+    font-size: 1rem   
