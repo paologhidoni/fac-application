@@ -1,11 +1,12 @@
 /* TABLE OF CONTENTS /////////////////////////////////////////////////////////*/
 
-/* Line 3 - NAVIGATION 
- * Line 11 - ACCORDION 
- * Line 11 - ANIMATING LINKS IN FOOTER
- * Line 11 - FADE-IN ANIMATION ON PARAGRAPHS    
- * Line 11 - DINAMICALLY UPDATE YEAR
- * Line 11 - DRUMKIT PROJECT 
+/* Line 15 -  NAVIGATION 
+ * Line 70 -  ACCORDION 
+ * Line 98 -  ANIMATING LINKS IN FOOTER
+ * Line 137 - PARALLAX SCROLLING EFFECT INTRO SECTION
+ * Line 149 - FADE-IN ANIMATION ON PARAGRAPHS    
+ * Line 185 - DINAMICALLY UPDATE YEAR
+ * Line 194 - DRUMKIT PROJECT 
 
 ///////////////////////////////////////////////////////////////////////////////////*/
 
@@ -132,6 +133,18 @@ footerLinksContainer.addEventListener('mouseout', function(e) {
 
 
 
+/////////////////////////////////////////////////////////////////////////////////////
+// PARALLAX SCROLLING EFFECT Oon intro hero background
+const introHeroBackground = document.querySelector('.section__hero--intro').firstElementChild; //Select intro hero background img.
+
+window.addEventListener('scroll', function(){
+  introHeroBackground.style.top = window.pageYOffset * 0.5 + 'px'; //As the user scrolls, dynamically change the background img positioning related to the top of its container. The top property is set to equal the value in pixel of the vertical distance from the top of the document multiplied x 0.5.
+})
+
+
+
+
+
 ////////////////////////////////////////////////////////////////////////
 // FADE-IN ANIMATION ON PARAGRAPHS, using the Intersection Observer API
 
@@ -170,6 +183,7 @@ gridItems.forEach(function(gridItem) { //Loop through all paragraphs.
 
 //////////////////////////////////////////
 // DINAMICALLY UPDATE YEAR in footer
+
 document.querySelector('.date').textContent = (new Date().getFullYear());
 
 
