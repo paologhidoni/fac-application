@@ -9,9 +9,9 @@ Thanks FaC for this huge opportunity.
 
 ## My steps in creating the website:
 
-1. Browse online for interesting layouts that might inspire me not only visually (colors, use of white space, fonts) but give me ideas on how and where to place interesting content in the website.
+1. I Browsed online for interesting layouts that might inspire me not only visually (colors, use of white space, fonts) but give me ideas on how and where to place interesting content in the website.
 
-2. Draw a quick mockup (or ten) on paper of how the website might look like, without going too deep into details but asking myself questions like:
+2. Drew a quick mockup (or ten) on paper of how the website might look like, without going too deep into details but asking myself questions like:
 
 - What is the main goal of the website.
 
@@ -25,25 +25,25 @@ Thanks FaC for this huge opportunity.
 
   These look a bit awful but are examples of some sketches I've made to figure out the layout of my website:
 
+<img src='./assets/img/project-1.jpg' style='max-width: 200px'>
+<img src='./assets/img/project-2.jpg' style='max-width: 200px'>
+<img src='./assets/img/project-3.jpg' style='max-width: 200px'>
+<img src='./assets/img/project-4.jpg' style='max-width: 200px'>
+<img src='./assets/img/project-5.jpg' style='max-width: 200px'>
 
+3. Ideally at this point I would have designed a mockup for the desktop and tablet/mobile versions of the website in Photoshop or any other software. I did not do this for this project, I adopted a different approach, I just started building because I wanted to practice coding while creating and give myself room to come up with something different with time.
 
-<img src='assets/img/project-1.jpg' style='max-width: 200px'>
-<img src='assets/img/project-2.jpg' style='max-width: 200px'>
-<img src='assets/img/project-3.jpg' style='max-width: 200px'>
-<img src='assets/img/project-4.jpg' style='max-width: 200px'>
-<img src='assets/img/project-5.jpg' style='max-width: 200px'>
+4. I've set up the a development environment, deciding folder structure in the project, setting up sass, npm, git (I've set up git at a later stage).
 
-3. Ideally design a mockup for the desktop and tablet/mobile versions of the website in Photoshop or any other software. I did not do this for this project, I adopted a different approach, I just started building because I wanted to practice coding while creating and give myself room to come up with something different with time.
+5. Started putting together most of the assets, such as images, sounds, fonts, storing color pallettes in CSS variables, writing copy (I initially wrote everythin in a Word file).
 
-4. Set up the a development environment, deciding folder structure in the project, setting up sass, npm, git (I've set up git at a later stage).
+6. Coded the website and keep checking it's responsiveness mostly using chrome's toggle device toolbar, the overall look taking screenshots using a browser extension called 'Nimbus Screenshot & Screen video recorder', asking for external feedback.
 
-5. Start putting together most of the assets, such as images, sounds, fonts, storing color pallettes in CSS variables, writing copy (I initially wrote everythin in a Word file).
+7. I was thinking about adding something a bit more personal and fun to the website, and I found out about the Web Audio Api, started learning more about it and decided to incorporate the drumkit app to interact and 'play' the drums in the browser.
 
-6. Code the website and keep checking it's responsiveness mostly using chrome's toggle device toolbar, the overall look taking screenshots using a browser extension called 'Nimbus Screenshot & Screen video recorder', asking for external feedback.
+8. Cleaned up the code as much as possible, minify images and audio files etc..
 
-7. Clean up the code as much as possible, minify images and audio files etc..
-
-8. Push the website to GitHub Pages and keep testing it on as many devices as possible.
+9. Pushed the website to GitHub Pages and keep testing it on as many devices as possible.
 
 
 

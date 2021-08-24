@@ -1,36 +1,29 @@
-'use strict'
-
 ///// DRUM KIT PROJECT /////////////////////////////////////////////////////////////
 
-//***************** */
-// NOTES*********** */
 
-// Turn your machine's volume down before start playing, then slowly turn it up to gradually check how loud the drum kit is!
-// You shouldn' be pressing any alt keys while playing and your cap locks should be off.
+const drumkit = document.querySelector('.drumkit'); //Select drumkit container.
+const drumkitBtn = document.querySelector('.drumkit__btn'); //Select ON/OFF btn.
 
-const drumkit = document.querySelector('.drumkit');
-const drumkitBtn = document.querySelector('.drumkit__btn');
+/*** ON/OFF button functionality ***/
 
-// ON/OFF button functionality
-drumkitBtn.addEventListener('click', function() {
-  drumkit.classList.toggle('on');
-  if(drumkit.classList.contains('on')) {
-    drumkitBtn.textContent = 'ON';
-    drumkitBtn.style.backgroundColor = 'rgba(0, 230, 64, 0.8)';
-  } else {
-    drumkitBtn.textContent = 'OFF';
-    drumkitBtn.style.backgroundColor = 'rgba(242, 38, 19, 0.8)';
+drumkitBtn.addEventListener('click', function() { //When the ON/OFF button is clicked
+  drumkit.classList.toggle('on'); //Apply 'on' class to drumkit.
+  if(drumkit.classList.contains('on')) { //If drumkit is on
+    drumkitBtn.textContent = 'ON'; //Change the button text to ON and
+    drumkitBtn.style.backgroundColor = 'rgba(0, 230, 64, 0.8)'; //change the button's background color to green.
+  } else { //If drumkit is ooff
+    drumkitBtn.textContent = 'OFF'; //Change the button text to OFF and
+    drumkitBtn.style.backgroundColor = 'rgba(242, 38, 19, 0.8)'; //change the button's background color to red.
   }
 });
 
 
-// Drum kit audio setup
-// const audioContext = new AudioContext();
+/*** Drum kit audio setup ***/
+
 const audioContext = new (window.AudioContext || window.webkitAudioContext)(); // Adds support for Safari
+
+
 // Audio buffer represents a certain duration of sound and stores the amplitude value of the signal
-
-// console.log(audioContext.sampleRate);
-
 
 ///// createBuffer() parameters: /////
 
@@ -39,27 +32,23 @@ const audioContext = new (window.AudioContext || window.webkitAudioContext)(); /
 //sample rate of our buffer
 
 const buffer = audioContext.createBuffer( 
-  2, 
+  2, // This is the number of channels
   audioContext.sampleRate * 0.5, // this is a mono buffer that holds one second worth of audio data.
-  audioContext.sampleRate
+  audioContext.sampleRate // This is the sample rate of our buffer, 44.100
 );
 
-const channelData = buffer.getChannelData(0); // this returns an array where each item is a number representing the level of that sample.
+// console.log(audioContext.sampleRate * 0.5);
+
+const channelData = buffer.getChannelData(0); // getChannelData() returns an array where each item is a number representing the level of that sample.
 
 // console.log(channelData.length);
 
-for (let i = 0; i < buffer.length; i++) { // assigning a random value between -1 and 1 to our signal we can create white noise.
-  channelData[i] = Math.random() * 2 - 1;
-}
 
-//the destination node represents whatever speakers are connected to play the audio on the computer.
-const primaryGainControl = audioContext.createGain(); // we create a gain node to control the main output volume.
-primaryGainControl.gain.setValueAtTime(0.50, 0); // we connect all of our audio nodes to our gain node. 0.40 is the 'gain volume', using a value less than 0 decreases the volume, more than 0 increases the volume.
-primaryGainControl.connect(audioContext.destination); //Connect the gain control to the output.
+const primaryGainControl = audioContext.createGain(); //Create a gain node to control the main output volume of our drumkit.
+primaryGainControl.gain.setValueAtTime(0.50, 0); //We set the output volume for our gain control. 0.50 is the 'gain volume', using a value less than 0 decreases the volume, more than 0 increases the volume.
+primaryGainControl.connect(audioContext.destination); //Connect the gain control to the output, the destination node represents whatever speakers are connected to play the audio on the computer.
 
-
-// MP3 AUDIO FILES ////////////////////////////////////////////////////////////////////
-
+//Create an object to store the kit pieces mp3 files relative paths.
 const drumkitSoundsURLs = {
   kick: 'assets/sounds/kick.mp3',
   snare:  'assets/sounds/snare.mp3',
@@ -88,7 +77,7 @@ const generateSound = async (id) => {
 };
 
 
-// Drum Kit Functionality
+/*** Drum kit functionality ***/
 
 // DESKTOP VERSION
 window.addEventListener('keydown', function(event) {
@@ -111,7 +100,6 @@ window.addEventListener('keydown', function(event) {
       piece = document.querySelector('.hi-hat') :    
       piece = undefined; 
 
-    // console.log(piece);
     if(piece !== undefined) { 
       piece.src = `assets/img/${piece.id}-active.png`; // Change image when kit-piece is played to give a visual hint of which one is played, adding a yellow stroke.
       setTimeout(() => { 
@@ -127,7 +115,6 @@ window.addEventListener('keydown', function(event) {
 // TABLET - MOBILE VERSION
 
 const kitMobileButtons = document.querySelectorAll('.drumkit-mobile-btn');
-      // console.log(kitMobileButtons);
 
 kitMobileButtons.forEach(button => {
 
