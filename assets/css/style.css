@@ -1,5 +1,6 @@
-/* TABLE OF CONTENTS //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
-/* Line 3 - VARIABLES 
+/* TABLE OF CONTENTS /////////////////////////////////////////////////////////////////
+ * *
+ * Line 3 - VARIABLES 
  * Line 11 - UTILITIES 
  * Line 11 - BASE
  * * - sections
@@ -13,8 +14,9 @@
  * * - accordion
  * * - drumkit
  * Line 11 - LAYOUT 
- * Line 11 - SECTIONS */
-/*////////////////////////////////////////////////////////////////////////////////// */
+ * Line 11 - SECTIONS 
+ * *
+ * */
 /* VARIABLES //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 :root {
   /* colors */
@@ -249,7 +251,7 @@ footer p {
   font-weight: 600;
   color: var(--color-white);
   font-size: 8rem;
-  z-index: 99;
+  z-index: 999;
   letter-spacing: 2.5rem;
 }
 @media (max-width: 75em) {
@@ -715,11 +717,11 @@ footer p {
 }
 
 .introduction {
+  z-index: 99;
   width: 100%;
   min-height: 20rem;
   padding: 3rem 20rem 5rem 20rem;
   background-color: rgba(0, 0, 0, 0.3);
-  z-index: 99;
 }
 @media (max-width: 75em) {
   .introduction {

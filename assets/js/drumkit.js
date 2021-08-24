@@ -1,6 +1,6 @@
 ///// DRUM KIT PROJECT /////////////////////////////////////////////////////////////
 
-
+//Variables
 const drumkit = document.querySelector('.drumkit'); //Select drumkit container.
 const drumkitBtn = document.querySelector('.drumkit__btn'); //Select ON/OFF btn.
 
@@ -18,37 +18,49 @@ drumkitBtn.addEventListener('click', function() { //When the ON/OFF button is cl
 });
 
 
-/*** Drum kit audio setup ***/
 
-const audioContext = new (window.AudioContext || window.webkitAudioContext)(); // Adds support for Safari
+/*** AUDIO SETUP ***/
 
+/*** 1. Create a new audio context ***************************************************
+Audio context is the environment to create any sound. */
 
-// Audio buffer represents a certain duration of sound and stores the amplitude value of the signal
-
-///// createBuffer() parameters: /////
-
-//numberOfChannels: 
-//number of samples in the entire buffer, multiply our sample rate by the number of seconds in our sample
-//sample rate of our buffer
-
-const buffer = audioContext.createBuffer( 
-  2, // This is the number of channels
-  audioContext.sampleRate * 0.5, // this is a mono buffer that holds one second worth of audio data.
-  audioContext.sampleRate // This is the sample rate of our buffer, 44.100
-);
-
-// console.log(audioContext.sampleRate * 0.5);
-
-const channelData = buffer.getChannelData(0); // getChannelData() returns an array where each item is a number representing the level of that sample.
-
-// console.log(channelData.length);
+const audioContext = new (window.AudioContext || window.webkitAudioContext)({ latencyHint: 'interactive' }); // Create a new audio context, set the latency to be as low as possible ('interactive'). Add support for Safari with webkit prefix.
 
 
-const primaryGainControl = audioContext.createGain(); //Create a gain node to control the main output volume of our drumkit.
-primaryGainControl.gain.setValueAtTime(0.50, 0); //We set the output volume for our gain control. 0.50 is the 'gain volume', using a value less than 0 decreases the volume, more than 0 increases the volume.
-primaryGainControl.connect(audioContext.destination); //Connect the gain control to the output, the destination node represents whatever speakers are connected to play the audio on the computer.
 
-//Create an object to store the kit pieces mp3 files relative paths.
+
+// /*** 2. Create a gain node *****************************************************
+// to control the main output volume of our drumkit.*/
+
+const primaryGainControl = audioContext.createGain(); //Create a gain node.
+primaryGainControl.gain.setValueAtTime(0.50, 0); //Set the output volume for our gain control. 0.50 is the 'gain volume', using a value less than 0 decreases the volume, more than 0 increases the volume.
+primaryGainControl.connect(audioContext.destination); //Connect the gain control to the output, the destination node represents whatever speakers are connected to play the audio on the computer (this will allow us to hear the sound).
+
+
+
+
+/*** 3. Create a function to generate sounds **************************************
+use the fetch API to download the sound, process it as an array buffer, and use the audio context decodeAudioData method to turn it into an audio buffer.
+***/
+
+const generateSound = async (id) => { //Use async function to load audio files.
+
+  const response = await fetch(drumkitSoundsURLs[id]); //Use the fetch API to download the sound.
+  const soundBuffer = await response.arrayBuffer();//Process the audio as an array buffer.
+  const pieceBuffer = await audioContext.decodeAudioData(soundBuffer); //Decode the audio file data contained in an 'soundBuffer'. decodeAudioData() creates an audio source for Web Audio API from an audio track.
+  const pieceSource = audioContext.createBufferSource(); //Create a new AudioBufferSourceNode and store it in the pieceSource variable. It can be used to play audio data contained within an audio buffer object.
+  pieceSource.buffer = pieceBuffer; //Assign the audio source 'pieceBuffer' I've created to the buffer property of the 'pieceSource' AudioBufferSourceNode object.
+  pieceSource.connect(primaryGainControl); //Connect 'pieceSource' to the main gain control
+  pieceSource.start(); //Play the source.
+
+};
+
+
+
+
+/*** 4. Store the audio files ***************************************************
+Create an object to store the kit pieces mp3 files relative paths. */
+
 const drumkitSoundsURLs = {
   kick: 'assets/sounds/kick.mp3',
   snare:  'assets/sounds/snare.mp3',
@@ -57,36 +69,32 @@ const drumkitSoundsURLs = {
   cymbal_right: 'assets/sounds/cymbal-right.mp3'
 };
 
-// Function to generate sounds
-const generateSound = async (id) => {
-
-  const response = await fetch(drumkitSoundsURLs[id]);
-
-  const soundBuffer = await response.arrayBuffer();
-
-  const pieceBuffer = await audioContext.decodeAudioData(soundBuffer);
-  
-  const pieceSource = audioContext.createBufferSource();
-
-  pieceSource.buffer = pieceBuffer;
-
-  pieceSource.connect(primaryGainControl);
-
-  pieceSource.start();
-
-};
 
 
-/*** Drum kit functionality ***/
 
-// DESKTOP VERSION
+/*** 5. Receive the user's input and play the selected kit piece *******************
+**/
+
+//Function to play a specific drumkit piece and give visual feedback, both for desktop and mobile.
+function playPiece(piece) {
+  if(piece !== undefined) { //If a valid key/button is pressed
+    piece.src = `assets/img/${piece.id}-active.png`; //Change image when kit-piece is played to give a visual hint of which one is played, adding a yellow stroke.
+    setTimeout(() => { 
+      piece.src = `assets/img/${piece.id}.png`; //Give the kit-piece its original image after 100milliseconds.
+    }, 100);
+    
+    generateSound(piece.id); //Run the function to generate the sound of the seletcted kit piece.
+  }
+}
+
+// Desktop Functionality, playing using keyboard.
 window.addEventListener('keydown', function(event) {
 
   if(drumkit.classList.contains('on')) { // If button is ON
 
     event.preventDefault();
 
-    let piece = '';
+    let piece = ''; //Establish what piece is being played.
 
     event.key === 's' ? 
       piece = document.querySelector('.snare') :
@@ -100,20 +108,12 @@ window.addEventListener('keydown', function(event) {
       piece = document.querySelector('.hi-hat') :    
       piece = undefined; 
 
-    if(piece !== undefined) { 
-      piece.src = `assets/img/${piece.id}-active.png`; // Change image when kit-piece is played to give a visual hint of which one is played, adding a yellow stroke.
-      setTimeout(() => { 
-        piece.src = `assets/img/${piece.id}.png`; // Give the kit-piece its original image after 100milliseconds.
-      }, 100);
-      
-      generateSound(piece.id);
-    }
+    playPiece(piece); //Play the kit piece.
   }
 });
 
 
-// TABLET - MOBILE VERSION
-
+// Tablet/mobile Functionality, playing using touchscreen buttons.
 const kitMobileButtons = document.querySelectorAll('.drumkit-mobile-btn');
 
 kitMobileButtons.forEach(button => {
@@ -122,7 +122,7 @@ kitMobileButtons.forEach(button => {
 
     if(drumkit.classList.contains('on')) { // If button is ON
 
-      let piece = '';
+      let piece = ''; //Establish what piece is being played.
 
       event.target.id === 'snare-btn' ? 
         piece = document.querySelector('.snare') :
@@ -136,15 +136,8 @@ kitMobileButtons.forEach(button => {
         piece = document.querySelector('.hi-hat') :    
         piece = undefined; 
 
-      // console.log(piece);
-      if(piece !== undefined) {
-        piece.src = `assets/img/${piece.id}-active.png`; // Change image when kit-piece is played to give a visual hint of which one is played, adding a yellow stroke.
-        setTimeout(() => { 
-          piece.src = `assets/img/${piece.id}.png`; // Give the kit-piece its original image after 100milliseconds.
-        }, 100);
-        
-        generateSound(piece.id);
-      }
+      playPiece(piece); //Play the kit piece.
     }
   })
 })
+

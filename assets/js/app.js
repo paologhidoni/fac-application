@@ -1,3 +1,15 @@
+/* TABLE OF CONTENTS /////////////////////////////////////////////////////////*/
+
+/* Line 3 - NAVIGATION 
+ * Line 11 - ACCORDION 
+ * Line 11 - ANIMATING LINKS IN FOOTER
+ * Line 11 - FADE-IN ANIMATION ON PARAGRAPHS    
+ * Line 11 - DINAMICALLY UPDATE YEAR
+ * Line 11 - DRUMKIT PROJECT 
+
+///////////////////////////////////////////////////////////////////////////////////*/
+
+
 ////////////////////////////////////////////////////////////////////////////
 //// NAVIGATION
 
@@ -121,30 +133,33 @@ footerLinksContainer.addEventListener('mouseout', function(e) {
 
 
 ////////////////////////////////////////////////////////////////////////
-// FADE-IN ANIMATION ON PARAGRAPHS, using Intersection Observer
+// FADE-IN ANIMATION ON PARAGRAPHS, using the Intersection Observer API
 
-const gridItems = document.querySelectorAll('.grid__item'); // Select all paragraphs.
+const gridItems = document.querySelectorAll('.grid__item'); //Select all paragraphs.
 
-//Function that will be called by the Intersection Observer.
+//Create the callback function to pass as first argument in the Intersection Observer. The callback function accepts 2 arguments:
+//1. entries is an array containing the threshold entries, every time the target element passes the threshold set for the root element (the viewport in this case) we get an event.
+//2. observer Is the Intersection Observer instance I will create, 'gridItemObserver'.
 const showgridItems = function(entries, observer) {
-  const [entry] = entries; //These are the paragraphs
-  if(!entry.isIntersecting) return; 
-    entry.target.classList.remove('grid__item--hidden'); // Show it.
-  observer.unobserve(entry.target); // Stop observing that paragraph.
+  const entry = entries[0]; //Store the last happening entry in the entries array.
+  entry.target.classList.remove('grid__item--hidden'); //Select the element that triggered the event by accessing the target property of the IntersectionObserverEntry object, and show it.
+  observer.unobserve(entry.target); //Unobserve the element that triggered the event because it has been shown already and the Intersection Observer would otherwise keep registering events for no reason. 
 }
 
-// Create a new Intersection Observer that will run a function on the element that is being observed, when it will be past the set threshold, respecting the rootMargin.
-const gridItemObserver = new IntersectionObserver(showgridItems, {
-  root: null,
-  threshold: 0.4,
-  rootMargin: '-50px'
-});
+//Store the options for our Intersection Observer into an object that will be passed as second argument when creating our Intersection Observer.
+//The callback function will run when these options/conditions will be met.
+const observerOptions = { 
+  root: null, //This is the element the target will be intersecting, the root element. Null represents the entire viewport.
+  threshold: 0.4 //This is the percentage of intersection at which the observer callback function will be called. In this case 40% of the target element needs to be visible for the callback function to be called.
+};
 
-gridItems.forEach(function(gridItem) { //Loop through all paragraphs
+// Create a new Intersection Observer that will run the 'showgridItems' function on the target element once the options specified in the observerOptions object are met, whether we are scrolling up or down.
+const gridItemObserver = new IntersectionObserver(showgridItems, observerOptions);
 
-  gridItemObserver.observe(gridItem); //Attach gridItemObserver to each paragraph.
-  gridItem.classList.add('grid__item--hidden'); //Hide all paragraphs.
+gridItems.forEach(function(gridItem) { //Loop through all paragraphs.
 
+  gridItemObserver.observe(gridItem); //Call the observe() method on every paragraph (the target element), it will use the Intersection Observer (gridItemObserver) to observe their position in relation to the root element (the viewport in this case).
+  gridItem.classList.add('grid__item--hidden'); //Hide all paragraphs. I didn't add the class inline in the HTML because if Javascript were not to work the paragraphs would stay hidden.
 });
 
 ////////////////////////////////////////////////////////////////////////
@@ -154,8 +169,159 @@ gridItems.forEach(function(gridItem) { //Loop through all paragraphs
 
 
 //////////////////////////////////////////
-//DINAMICALLY UPDATE YEAR in footer
+// DINAMICALLY UPDATE YEAR in footer
 document.querySelector('.date').textContent = (new Date().getFullYear());
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////
+// DRUMKIT PROJECT
+
+//Variables
+const drumkit = document.querySelector('.drumkit'); //Select drumkit container.
+const drumkitBtn = document.querySelector('.drumkit__btn'); //Select ON/OFF btn.
+
+/*** ON/OFF button functionality ***/
+
+drumkitBtn.addEventListener('click', function() { //When the ON/OFF button is clicked
+  drumkit.classList.toggle('on'); //Apply 'on' class to drumkit.
+  if(drumkit.classList.contains('on')) { //If drumkit is on
+    drumkitBtn.textContent = 'ON'; //Change the button text to ON and
+    drumkitBtn.style.backgroundColor = 'rgba(0, 230, 64, 0.8)'; //change the button's background color to green.
+  } else { //If drumkit is ooff
+    drumkitBtn.textContent = 'OFF'; //Change the button text to OFF and
+    drumkitBtn.style.backgroundColor = 'rgba(242, 38, 19, 0.8)'; //change the button's background color to red.
+  }
+});
+
+
+
+/*** AUDIO SETUP ***/
+
+/*** 1. Create a new audio context ***************************************************
+Audio context is the environment to create any sound. */
+
+const audioContext = new (window.AudioContext || window.webkitAudioContext)({ latencyHint: 'interactive' }); // Create a new audio context, set the latency to be as low as possible ('interactive'). Add support for Safari with webkit prefix.
+
+
+
+
+// /*** 2. Create a gain node *****************************************************
+// to control the main output volume of our drumkit.*/
+
+const primaryGainControl = audioContext.createGain(); //Create a gain node.
+primaryGainControl.gain.setValueAtTime(0.50, 0); //Set the output volume for our gain control. 0.50 is the 'gain volume', using a value less than 0 decreases the volume, more than 0 increases the volume.
+primaryGainControl.connect(audioContext.destination); //Connect the gain control to the output, the destination node represents whatever speakers are connected to play the audio on the computer (this will allow us to hear the sound).
+
+
+
+
+/*** 3. Create a function to generate sounds **************************************
+use the fetch API to download the sound, process it as an array buffer, and use the audio context decodeAudioData method to turn it into an audio buffer.
+***/
+
+const generateSound = async (id) => { //Use async function to load audio files.
+
+  const response = await fetch(drumkitSoundsURLs[id]); //Use the fetch API to download the sound.
+  const soundBuffer = await response.arrayBuffer();//Process the audio as an array buffer.
+  const pieceBuffer = await audioContext.decodeAudioData(soundBuffer); //Decode the audio file data contained in an 'soundBuffer'. decodeAudioData() creates an audio source for Web Audio API from an audio track.
+  const pieceSource = audioContext.createBufferSource(); //Create a new AudioBufferSourceNode and store it in the pieceSource variable. It can be used to play audio data contained within an audio buffer object.
+  pieceSource.buffer = pieceBuffer; //Assign the audio source 'pieceBuffer' I've created to the buffer property of the 'pieceSource' AudioBufferSourceNode object.
+  pieceSource.connect(primaryGainControl); //Connect 'pieceSource' to the main gain control
+  pieceSource.start(); //Play the source.
+
+};
+
+
+
+
+/*** 4. Store the audio files ***************************************************
+Create an object to store the kit pieces mp3 files relative paths. */
+
+const drumkitSoundsURLs = {
+  kick: 'assets/sounds/kick.mp3',
+  snare:  'assets/sounds/snare.mp3',
+  hi_hat: 'assets/sounds/hi-hat.mp3',
+  cymbal_left: 'assets/sounds/cymbal-left.mp3',
+  cymbal_right: 'assets/sounds/cymbal-right.mp3'
+};
+
+
+
+
+/*** 5. Receive the user's input and play the selected kit piece *******************
+**/
+
+//Function to play a specific drumkit piece and give visual feedback, both for desktop and mobile.
+function playPiece(piece) {
+  if(piece !== undefined) { //If a valid key/button is pressed
+    piece.src = `assets/img/${piece.id}-active.png`; //Change image when kit-piece is played to give a visual hint of which one is played, adding a yellow stroke.
+    setTimeout(() => { 
+      piece.src = `assets/img/${piece.id}.png`; //Give the kit-piece its original image after 100milliseconds.
+    }, 100);
+    
+    generateSound(piece.id); //Run the function to generate the sound of the seletcted kit piece.
+  }
+}
+
+// Desktop Functionality, playing using keyboard.
+window.addEventListener('keydown', function(event) {
+
+  if(drumkit.classList.contains('on')) { // If button is ON
+
+    event.preventDefault();
+
+    let piece = ''; //Establish what piece is being played.
+
+    event.key === 's' ? 
+      piece = document.querySelector('.snare') :
+    event.key === ' ' ? 
+      piece = document.querySelector('.kick') :
+    event.key === 'k' ? 
+      piece = document.querySelector('.cymbal-right') :
+    event.key === 'a' ? 
+      piece = document.querySelector('.cymbal-left') :
+    event.key === 'h' ? 
+      piece = document.querySelector('.hi-hat') :    
+      piece = undefined; 
+
+    playPiece(piece); //Play the kit piece.
+  }
+});
+
+
+// Tablet/mobile Functionality, playing using touchscreen buttons.
+const kitMobileButtons = document.querySelectorAll('.drumkit-mobile-btn');
+
+kitMobileButtons.forEach(button => {
+
+  button.addEventListener('click', function(event) {
+
+    if(drumkit.classList.contains('on')) { // If button is ON
+
+      let piece = ''; //Establish what piece is being played.
+
+      event.target.id === 'snare-btn' ? 
+        piece = document.querySelector('.snare') :
+      event.target.id === 'kick-btn' ? 
+        piece = document.querySelector('.kick') :
+      event.target.id === 'crash-r-btn' ? 
+        piece = document.querySelector('.cymbal-right') :
+      event.target.id === 'crash-l-btn' ? 
+        piece = document.querySelector('.cymbal-left') :
+      event.target.id === 'hi-hat-btn' ? 
+        piece = document.querySelector('.hi-hat') :    
+        piece = undefined; 
+
+      playPiece(piece); //Play the kit piece.
+    }
+  })
+})
+
+////////////////////////////////////////////////////////////////////////
+// DRUMKIT PROJECT end
 
 
 
@@ -183,160 +349,3 @@ document.querySelector('.date').textContent = (new Date().getFullYear());
 
 
 
-
-
-
-
-
-// ///// DRUM KIT PROJECT /////////////////////////////////////////////////////////////
-
-
-// const drumkit = document.querySelector('.drumkit'); //Select drumkit container.
-// const drumkitBtn = document.querySelector('.drumkit__btn'); //Select ON/OFF btn.
-
-// /*** ON/OFF button functionality ***/
-
-// drumkitBtn.addEventListener('click', function() { //When the ON/OFF button is clicked
-//   drumkit.classList.toggle('on'); //Apply 'on' class to drumkit.
-//   if(drumkit.classList.contains('on')) { //If drumkit is on
-//     drumkitBtn.textContent = 'ON'; //Change the button text to ON and
-//     drumkitBtn.style.backgroundColor = 'rgba(0, 230, 64, 0.8)'; //change the button's background color to green.
-//   } else { //If drumkit is ooff
-//     drumkitBtn.textContent = 'OFF'; //Change the button text to OFF and
-//     drumkitBtn.style.backgroundColor = 'rgba(242, 38, 19, 0.8)'; //change the button's background color to red.
-//   }
-// });
-
-
-// /*** Drum kit audio setup ***/
-
-// const audioContext = new (window.AudioContext || window.webkitAudioContext)(); // Adds support for Safari
-
-
-// // Audio buffer represents a certain duration of sound and stores the amplitude value of the signal
-
-// ///// createBuffer() parameters: /////
-
-// //numberOfChannels: 
-// //number of samples in the entire buffer, multiply our sample rate by the number of seconds in our sample
-// //sample rate of our buffer
-
-// const buffer = audioContext.createBuffer( 
-//   2, // This is the number of channels
-//   audioContext.sampleRate * 0.5, // this is a mono buffer that holds one second worth of audio data.
-//   audioContext.sampleRate // This is the sample rate of our buffer, 44.100
-// );
-
-// // console.log(audioContext.sampleRate * 0.5);
-
-// const channelData = buffer.getChannelData(0); // getChannelData() returns an array where each item is a number representing the level of that sample.
-
-// // console.log(channelData.length);
-
-
-// const primaryGainControl = audioContext.createGain(); //Create a gain node to control the main output volume of our drumkit.
-// primaryGainControl.gain.setValueAtTime(0.50, 0); //We set the output volume for our gain control. 0.50 is the 'gain volume', using a value less than 0 decreases the volume, more than 0 increases the volume.
-// primaryGainControl.connect(audioContext.destination); //Connect the gain control to the output, the destination node represents whatever speakers are connected to play the audio on the computer.
-
-// //Create an object to store the kit pieces mp3 files relative paths.
-// const drumkitSoundsURLs = {
-//   kick: 'assets/sounds/kick.mp3',
-//   snare:  'assets/sounds/snare.mp3',
-//   hi_hat: 'assets/sounds/hi-hat.mp3',
-//   cymbal_left: 'assets/sounds/cymbal-left.mp3',
-//   cymbal_right: 'assets/sounds/cymbal-right.mp3'
-// };
-
-// // Function to generate sounds
-// const generateSound = async (id) => {
-
-//   const response = await fetch(drumkitSoundsURLs[id]);
-
-//   const soundBuffer = await response.arrayBuffer();
-
-//   const pieceBuffer = await audioContext.decodeAudioData(soundBuffer);
-  
-//   const pieceSource = audioContext.createBufferSource();
-
-//   pieceSource.buffer = pieceBuffer;
-
-//   pieceSource.connect(primaryGainControl);
-
-//   pieceSource.start();
-
-// };
-
-
-// // Drum Kit Functionality
-
-// // DESKTOP VERSION
-// window.addEventListener('keydown', function(event) {
-
-//   if(drumkit.classList.contains('on')) { // If button is ON
-
-//     event.preventDefault();
-
-//     let piece = '';
-
-//     event.key === 's' ? 
-//       piece = document.querySelector('.snare') :
-//     event.key === ' ' ? 
-//       piece = document.querySelector('.kick') :
-//     event.key === 'k' ? 
-//       piece = document.querySelector('.cymbal-right') :
-//     event.key === 'a' ? 
-//       piece = document.querySelector('.cymbal-left') :
-//     event.key === 'h' ? 
-//       piece = document.querySelector('.hi-hat') :    
-//       piece = undefined; 
-
-//     // console.log(piece);
-//     if(piece !== undefined) { 
-//       piece.src = `assets/img/${piece.id}-active.png`; // Change image when kit-piece is played to give a visual hint of which one is played, adding a yellow stroke.
-//       setTimeout(() => { 
-//         piece.src = `assets/img/${piece.id}.png`; // Give the kit-piece its original image after 100milliseconds.
-//       }, 100);
-      
-//       generateSound(piece.id);
-//     }
-//   }
-// });
-
-
-// // TABLET - MOBILE VERSION
-
-// const kitMobileButtons = document.querySelectorAll('.drumkit-mobile-btn');
-//       // console.log(kitMobileButtons);
-
-// kitMobileButtons.forEach(button => {
-
-//   button.addEventListener('click', function(event) {
-
-//     if(drumkit.classList.contains('on')) { // If button is ON
-
-//       let piece = '';
-
-//       event.target.id === 'snare-btn' ? 
-//         piece = document.querySelector('.snare') :
-//       event.target.id === 'kick-btn' ? 
-//         piece = document.querySelector('.kick') :
-//       event.target.id === 'crash-r-btn' ? 
-//         piece = document.querySelector('.cymbal-right') :
-//       event.target.id === 'crash-l-btn' ? 
-//         piece = document.querySelector('.cymbal-left') :
-//       event.target.id === 'hi-hat-btn' ? 
-//         piece = document.querySelector('.hi-hat') :    
-//         piece = undefined; 
-
-//       // console.log(piece);
-//       if(piece !== undefined) {
-//         piece.src = `assets/img/${piece.id}-active.png`; // Change image when kit-piece is played to give a visual hint of which one is played, adding a yellow stroke.
-//         setTimeout(() => { 
-//           piece.src = `assets/img/${piece.id}.png`; // Give the kit-piece its original image after 100milliseconds.
-//         }, 100);
-        
-//         generateSound(piece.id);
-//       }
-//     }
-//   })
-// })
