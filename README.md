@@ -25,11 +25,11 @@ Thanks FaC for this huge opportunity.
 
   These look a bit awful but are examples of some sketches I've made to figure out the layout of my website:
 
-  <img src='https://github.com/paologhidoni/fac-application/blob/master/assets/img/Project-1.jpg' style='max-width: 300px' alt='website sketch number 1'>
-  <img src='https://github.com/paologhidoni/fac-application/blob/master/assets/img/Project-2.jpg' style='max-width: 300px' alt='website sketch number 2'>
-  <img src='https://github.com/paologhidoni/fac-application/blob/master/assets/img/Project-3.jpg' style='max-width: 300px' alt='website sketch number 3'>
-  <img src='https://github.com/paologhidoni/fac-application/blob/master/assets/img/Project-4.jpg' style='max-width: 300px' alt='website sketch number 4'>
-  <img src='https://github.com/paologhidoni/fac-application/blob/master/assets/img/Project-5.jpg' style='max-width: 300px' alt='website sketch number 5'>
+  <img src='https://github.com/paologhidoni/fac-application/blob/master/assets/img/Project-1.jpg' style='width: 300px'>
+  <img src='https://github.com/paologhidoni/fac-application/blob/master/assets/img/Project-2.jpg' style='width: 300px'>
+  <img src='https://github.com/paologhidoni/fac-application/blob/master/assets/img/Project-3.jpg' style='width: 300px'>
+  <img src='https://github.com/paologhidoni/fac-application/blob/master/assets/img/Project-4.jpg' style='width: 300px'>
+  <img src='https://github.com/paologhidoni/fac-application/blob/master/assets/img/Project-5.jpg' style='width: 300px'>
 
 3. Ideally at this point I would have designed a mockup for the desktop and tablet/mobile versions of the website in Photoshop or any other software. I did not do this for this project, I adopted a different approach, I just started building because I wanted to practice coding while creating and give myself room to come up with something different with time.
 
