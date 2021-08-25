@@ -200,6 +200,7 @@ const drumkitBtn = document.querySelector('.drumkit__btn'); //Select ON/OFF btn.
 /*** ON/OFF button functionality ***/
 
 drumkitBtn.addEventListener('click', function() { //When the ON/OFF button is clicked
+
   drumkit.classList.toggle('on'); //Apply 'on' class to drumkit.
   if(drumkit.classList.contains('on')) { //If drumkit is on
     drumkitBtn.textContent = 'ON'; //Change the button text to ON and

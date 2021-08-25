@@ -19,19 +19,17 @@ Thanks FaC for this huge opportunity.
 
 - How do I want to present myself.
 
-- What content and how much content I want to present, in how many sections.
+- What content and how much content I want to present, how many sections.
 
 - How would I implement single fundamental components like a navigation, a footer and so on.
 
   These look a bit awful but are examples of some sketches I've made to figure out the layout of my website:
 
-<div style='display: flex'>
-  <img src='https://github.com/paologhidoni/fac-application/blob/master/assets/img/Project-1.jpg' style='max-width: 200px' alt='website sketch number 1'>
-  <img src='https://github.com/paologhidoni/fac-application/blob/master/assets/img/Project-2.jpg' alt='website sketch number 2'>
-  <img src='https://github.com/paologhidoni/fac-application/blob/master/assets/img/Project-3.jpg' style='max-width: 200px' alt='website sketch number 3'>
-  <img src='https://github.com/paologhidoni/fac-application/blob/master/assets/img/Project-4.jpg' style='max-width: 200px' alt='website sketch number 4'>
-  <img src='https://github.com/paologhidoni/fac-application/blob/master/assets/img/Project-5.jpg' style='max-width: 200px' alt='website sketch number 5'>
-</div>
+  <img src='https://github.com/paologhidoni/fac-application/blob/master/assets/img/Project-1.jpg' style='max-width: 300px' alt='website sketch number 1'>
+  <img src='https://github.com/paologhidoni/fac-application/blob/master/assets/img/Project-2.jpg' style='max-width: 300px' alt='website sketch number 2'>
+  <img src='https://github.com/paologhidoni/fac-application/blob/master/assets/img/Project-3.jpg' style='max-width: 300px' alt='website sketch number 3'>
+  <img src='https://github.com/paologhidoni/fac-application/blob/master/assets/img/Project-4.jpg' style='max-width: 300px' alt='website sketch number 4'>
+  <img src='https://github.com/paologhidoni/fac-application/blob/master/assets/img/Project-5.jpg' style='max-width: 300px' alt='website sketch number 5'>
 
 3. Ideally at this point I would have designed a mockup for the desktop and tablet/mobile versions of the website in Photoshop or any other software. I did not do this for this project, I adopted a different approach, I just started building because I wanted to practice coding while creating and give myself room to come up with something different with time.
 
@@ -43,9 +41,9 @@ Thanks FaC for this huge opportunity.
 
 7. I was thinking about adding something a bit more personal and fun to the website, and I found out about the Web Audio Api, started learning more about it and decided to incorporate the drumkit app to interact and 'play' the drums in the browser.
 
-8. Cleaned up the code as much as possible, minify images and audio files etc..
+8. Cleaned up / refactored the code as much as possible, minifyied images and audio files etc..
 
-9. Pushed the website to GitHub Pages and keep testing it on as many devices as possible.
+9. Pushed the website to GitHub Pages and kept testing it on as many devices as possible.
 
 
 
@@ -78,3 +76,10 @@ Thanks FaC for this huge opportunity.
 
 
 
+## Notes
+
+A message appears in the console when we loading the website:
+
+'The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page.'
+
+This happens because the audioContext was created in the 'suspended' state before the user interacted with the page. A resume() method is available to resume the audioContext when the user interacts (for example clicking on a ON/OFF button); in this case it was not necessary to run resume(), since the audioContext authomatically resumes in the 'generateSound' function when the sound is generated running the start() method. More on this at [here](https://developer.chrome.com/blog/autoplay/#webaudio).
