@@ -70,7 +70,7 @@ Thanks FaC for this huge opportunity.
 
 - [ ]Add different samples at different 'velocities' (perceived loudness and tone of the 'hit') to each kit piece, to make them sound more real and interesting.
 
-- [ ]Improve audio compatibility with tablet/mobile browsers. (audio seems not to be working in Safari on Iphone, works on laptop and android).
+- [ ]Improve audio compatibility with tablet/mobile browsers. Audio works in Chrome, Opera, Edge, Firefox. It does not work in Safari at the moment.
 
 -  A thousand more features, I could have probably gone on for a year or two :D
 
